@@ -1,0 +1,246 @@
+.mov-form {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 25px;
+
+  color: #e5edf3;
+  font-family: "Inter", sans-serif;
+
+  /* =======================================================
+     HEADER
+  ======================================================= */
+  .header {
+    margin-bottom: 25px;
+
+    .titulo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      .icono {
+        font-size: 34px;
+        color: #1ea7ff;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 26px;
+        font-weight: 700;
+        color: #fff;
+      }
+    }
+
+    .subtitulo {
+      margin: 6px 0 0 46px;
+      color: #bcd5e0;
+      font-size: 14px;
+    }
+  }
+
+  /* =======================================================
+     CARD FORM
+  ======================================================= */
+  .form-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(7px);
+    border-radius: 22px;
+
+    padding: 25px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* =======================================================
+     BLOQUES (Producto / Proveedor / Detalles)
+  ======================================================= */
+  .bloque {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    .bloque-titulo {
+      font-size: 17px;
+      font-weight: 600;
+      color: #d6e3ec;
+      margin-bottom: 2px;
+    }
+  }
+
+  /* =======================================================
+     FORM GROUP
+  ======================================================= */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+      font-size: 14px;
+      color: #bcd2df;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+      outline: none;
+      font-size: 15px;
+
+      &::placeholder {
+        color: #9bb5c7;
+      }
+    }
+  }
+
+  /* =======================================================
+     INPUT CON ICONO
+  ======================================================= */
+  .input-icon {
+    position: relative;
+
+    span.material-icons {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #9bb5c7;
+    }
+
+    input {
+      padding-left: 40px;
+    }
+  }
+
+  /* =======================================================
+     LISTA DE RESULTADOS (buscador)
+  ======================================================= */
+  .resultados {
+    margin-top: 4px;
+    list-style: none;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+
+    max-height: 190px;
+    overflow-y: auto;
+
+    li {
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: 0.25s;
+      color: #dbe7ef;
+      font-size: 14px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+    }
+  }
+
+  /* =======================================================
+     FORM ROW (Cantidad + Precio)
+  ======================================================= */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    @media (width < 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* =======================================================
+     BOTONES
+  ======================================================= */
+  .acciones {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 10px;
+
+    @media (width < 600px) {
+      flex-direction: column;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+
+      border: none;
+      cursor: pointer;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: 0.25s ease;
+
+      .material-icons {
+        font-size: 20px;
+      }
+    }
+
+    .btn-secundario {
+      background: rgba(255, 255, 255, 0.12);
+      color: #dbe7ee;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.20);
+      }
+    }
+
+    .btn-primario {
+      background: linear-gradient(135deg, #1ea7ff, #0074d9);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(0, 140, 255, 0.35);
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 140, 255, 0.55);
+      }
+
+      &:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@media (width < 600px) {
+
+  .mov-form {
+
+    .input-icon {
+      position: relative;
+
+      span.material-icons {
+        font-size: 18px;
+        left: 10px;
+      }
+
+      input, textarea {
+        padding-left: 40px !important;
+        font-size: 14px;
+        height: 42px;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+  }
+}

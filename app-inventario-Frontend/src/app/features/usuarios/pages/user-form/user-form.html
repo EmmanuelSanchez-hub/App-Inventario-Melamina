@@ -1,0 +1,77 @@
+<section class="user-form">
+
+    <h2>{{ editMode ? 'Editar Usuario' : 'Registrar Nuevo Usuario' }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+
+        <!-- USERNAME -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" formControlName="username" type="text" />
+            <p class="error" *ngIf="form.get('username')?.invalid && form.get('username')?.touched">
+                El username es obligatorio.
+            </p>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+            <label for="email">Correo</label>
+            <input id="email" formControlName="email" type="email" />
+            <p class="error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+                Debe ingresar un email válido.
+            </p>
+        </div>
+
+        <!-- NOMBRES -->
+        <div class="form-group">
+            <label for="nombres">Nombres</label>
+            <input id="nombres" formControlName="nombres" type="text" />
+            <p class="error" *ngIf="form.get('nombres')?.invalid && form.get('nombres')?.touched">
+                Este campo es obligatorio.
+            </p>
+        </div>
+
+        <!-- APELLIDOS -->
+        <div class="form-group">
+            <label for="apellidos">Apellidos</label>
+            <input id="apellidos" formControlName="apellidos" type="text" />
+            <p class="error" *ngIf="form.get('apellidos')?.invalid && form.get('apellidos')?.touched">
+                Este campo es obligatorio.
+            </p>
+        </div>
+
+        <!-- TELÉFONO -->
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" formControlName="telefono" type="text" />
+        </div>
+
+        <!-- ROL -->
+        <div class="form-group">
+            <label for="rol">Rol</label>
+            <select id="rol" formControlName="rol">
+                <option *ngFor="let r of roles" [value]="r.value">{{ r.label }}</option>
+            </select>
+        </div>
+
+        <!-- ESTADO -->
+        <div class="form-group" *ngIf="editMode">
+            <label for="activo">Estado</label>
+            <select id="activo" formControlName="activo">
+                <option [value]="true">Activo</option>
+                <option [value]="false">Inactivo</option>
+            </select>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="acciones">
+            <button type="submit" class="btn-primary">
+                {{ editMode ? 'Actualizar' : 'Registrar' }}
+            </button>
+            <button type="button" class="btn-secondary" routerLink="/usuarios">
+                Cancelar
+            </button>
+        </div>
+
+    </form>
+</section>

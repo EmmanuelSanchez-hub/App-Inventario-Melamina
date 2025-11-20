@@ -1,0 +1,296 @@
+.usuarios {
+  max-width: 1280px;
+  margin: 12px auto;
+  padding: 25px;
+
+  background: linear-gradient(180deg, #0d1f2d, #143044);
+  color: #e5edf3;
+  font-family: "Inter", sans-serif;
+
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+
+  /* ---------------------------- */
+  /* HEADER */
+  /* ---------------------------- */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+
+    h2 {
+      font-size: 26px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0;
+      letter-spacing: 0.4px;
+    }
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+
+      background: linear-gradient(135deg, #1ea7ff, #0074d9);
+      color: #ffffff;
+      font-size: 15px;
+
+      box-shadow: 0 4px 12px rgba(0, 140, 255, 0.4);
+      transition: 0.25s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 140, 255, 0.55);
+      }
+    }
+  }
+
+  /* ---------------------------- */
+  /* BUSCADOR */
+  /* ---------------------------- */
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 10px 15px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    backdrop-filter: blur(4px);
+
+    .material-icons {
+      font-size: 20px;
+      color: #9bb5c7;
+    }
+
+    input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 15px;
+      color: #eaf3f8;
+
+      &::placeholder {
+        color: #9bb5c7;
+      }
+    }
+  }
+
+  /* ---------------------------- */
+  /* CARD */
+  /* ---------------------------- */
+  .card {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ---------------------------- */
+  /* TABLA */
+  /* ---------------------------- */
+  .tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+
+    thead {
+      background: rgba(255, 255, 255, 0.08);
+
+      th {
+        padding: 14px 12px;
+        font-weight: 600;
+        color: #d7e4ea;
+        text-align: left;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+      }
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: 0.25s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      td {
+        padding: 12px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  /* ---------------------------- */
+  /* BADGES */
+  /* ---------------------------- */
+  .badge {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .badge-activo {
+    background: rgba(0, 200, 120, 0.2);
+    color: #00e68a;
+    border: 1px solid rgba(0, 200, 120, 0.35);
+  }
+
+  .badge-inactivo {
+    background: rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+    border: 1px solid rgba(255, 77, 77, 0.35);
+  }
+
+  /* ---------------------------- */
+  /* ACCIONES */
+  /* ---------------------------- */
+  .acciones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    .icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(255, 255, 255, 0.10);
+      transition: 0.25s ease;
+
+      .material-icons {
+        font-size: 20px;
+      }
+
+      &.edit {
+        color: #1ea7ff;
+        &:hover { background: rgba(30, 167, 255, 0.15); }
+      }
+
+      &.delete {
+        color: #ff4d4d;
+        &:hover { background: rgba(255, 77, 77, 0.18); }
+      }
+
+      &.success {
+        color: #3ddc97;
+        &:hover { background: rgba(61, 220, 151, 0.15); }
+      }
+    }
+  }
+
+  /* ---------------------------- */
+  /* EMPTY */
+  /* ---------------------------- */
+  .empty {
+    margin-top: 16px;
+    text-align: center;
+    color: #c8d4dc;
+  }
+
+  /* ---------------------------- */
+  /* LOADING */
+  /* ---------------------------- */
+  .loading {
+    margin-top: 40px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    font-size: 18px;
+
+    .material-icons {
+      font-size: 22px;
+    }
+  }
+}
+
+/* ===========================================================
+   RESPONSIVE — SIN DESBORDES (width < 600px)
+=========================================================== */
+@media (width < 600px) {
+  .usuarios {
+    padding: 15px;
+    margin: 8px;
+    border-radius: 18px;
+
+    * {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+
+      /* -------- BOTÓN COMPACTO -------- */
+      .btn-primary {
+        width: auto !important;
+        padding: 6px 14px !important;
+        font-size: 13px !important;
+        border-radius: 10px !important;
+
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        .material-icons {
+          font-size: 16px !important;
+        }
+      }
+    }
+
+    .search-box {
+      padding: 10px;
+    }
+
+    .card {
+      padding: 15px;
+    }
+
+    .tabla {
+      overflow-x: auto;
+      display: block;
+      white-space: nowrap;
+    }
+
+    th,
+    td {
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    .acciones .icon {
+      width: 32px;
+      height: 32px;
+
+      .material-icons {
+        font-size: 18px;
+      }
+    }
+  }
+}

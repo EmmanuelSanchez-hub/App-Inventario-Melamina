@@ -1,0 +1,103 @@
+<section class="usuarios">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h2>Gestión de Usuarios</h2>
+
+    <button class="btn-primary" routerLink="/usuarios/nuevo">
+      <span class="material-icons">add</span>
+      Agregar Usuario
+    </button>
+  </div>
+
+  <!-- BARRA DE BÚSQUEDA -->
+  <div class="search-box">
+    <span class="material-icons">search</span>
+    <input
+      type="text"
+      placeholder="Buscar por username..."
+      [(ngModel)]="termino"
+      (input)="buscar()"
+    />
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <ng-container *ngIf="usuarios$ | async as usuarios; else cargandoTpl">
+
+    <div class="card">
+
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th class="acciones-col">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let u of usuarios">
+
+            <td>{{ u.username }}</td>
+            <td>{{ u.nombres }}</td>
+            <td>{{ u.apellidos }}</td>
+            <td>{{ u.email }}</td>
+            <td>{{ u.rol }}</td>
+
+            <td>
+              <span class="badge" [ngClass]="u.activo ? 'badge-activo' : 'badge-inactivo'">
+                {{ u.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+
+            <td class="acciones">
+
+              <!-- Editar -->
+              <button class="icon edit" [routerLink]="['/usuarios/editar', u.id]">
+                <span class="material-icons">edit</span>
+              </button>
+
+              <!-- Activar / Desactivar -->
+              <button
+                class="icon delete"
+                *ngIf="u.activo"
+                (click)="desactivar(u.id)"
+              >
+                <span class="material-icons">block</span>
+              </button>
+
+              <button
+                class="icon success"
+                *ngIf="!u.activo"
+                (click)="activar(u.id)"
+              >
+                <span class="material-icons">check_circle</span>
+              </button>
+
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <p *ngIf="usuarios.length === 0" class="empty">
+        No hay usuarios registrados.
+      </p>
+
+    </div>
+
+  </ng-container>
+
+  <!-- LOADING -->
+  <ng-template #cargandoTpl>
+    <div class="loading">
+      <span class="material-icons">hourglass_empty</span>
+      Cargando...
+    </div>
+  </ng-template>
+
+</section>

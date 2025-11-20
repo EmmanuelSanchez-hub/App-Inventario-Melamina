@@ -1,0 +1,89 @@
+<section class="clientes" *ngIf="api.can('clientes_read'); else sinPermiso">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h2>Gestión de Clientes</h2>
+    <button 
+      class="btn-primary" 
+      routerLink="/clientes/nuevo"
+      *ngIf="api.can('clientes_write')">
+      <span class="material-icons">add</span>
+      Agregar Cliente
+    </button>
+  </div>
+  <div class="search-box">
+    <span class="material-icons">search</span>
+    <input
+      type="text"
+      placeholder="Buscar por documento..."
+      [(ngModel)]="termino"
+      (input)="buscar()"
+    />
+  </div>
+  <ng-container *ngIf="clientes$ | async as clientes; else cargandoTpl">
+
+    <div class="card">
+
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Nombres</th>
+            <th>Apellidos / Razón Social</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Ciudad</th>
+            <th>Estado</th>
+            <th class="acciones-col" *ngIf="api.can('clientes_write')">
+              Acciones
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let c of clientes">
+            <td>{{ c.numeroDocumento }}</td>
+            <td>{{ c.nombres || '-' }}</td>
+            <td>{{ c.apellidos || c.razonSocial }}</td>
+            <td>{{ c.telefono || '-' }}</td>
+            <td>{{ c.email || '-' }}</td>
+            <td>{{ c.ciudad || '-' }}</td>
+
+            <td>
+              <span class="badge" [ngClass]="c.activo ? 'badge-activo' : 'badge-inactivo'">
+                {{ c.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td class="acciones" *ngIf="api.can('clientes_write')">
+              <button class="icon edit" [routerLink]="['/clientes/editar', c.id]">
+                <span class="material-icons">edit</span>
+              </button>
+
+              <button class="icon delete" (click)="eliminar(c.id)">
+                <span class="material-icons">delete</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p *ngIf="clientes.length === 0" class="empty">
+        No hay clientes registrados.
+      </p>
+
+    </div>
+
+  </ng-container>
+  <ng-template #cargandoTpl>
+    <div class="loading">
+      <span class="material-icons">hourglass_empty</span>
+      Cargando...
+    </div>
+  </ng-template>
+
+</section>
+<ng-template #sinPermiso>
+  <div class="sin-permiso">
+    <h2>No tienes permiso para ver los clientes.</h2>
+  </div>
+</ng-template>

@@ -1,0 +1,49 @@
+<section class="inventario-list" *ngIf="api.can('inventario_read'); else sinPermiso">
+  <header class="top-bar">
+    <input
+      type="text"
+      [(ngModel)]="termino"
+      (input)="buscar()"
+      placeholder="Buscar por nombre o código"
+    />
+
+    <button class="btn-filtro" (click)="toggleFiltros()">
+      Filtros
+    </button>
+  </header>
+  <div class="filtros" *ngIf="mostrarFiltros">
+    <button (click)="setFiltro('todos')" [class.active]="filtro === 'todos'">
+      Todos
+    </button>
+
+    <button (click)="setFiltro('con-stock')" [class.active]="filtro === 'con-stock'">
+      Con stock
+    </button>
+
+    <button (click)="setFiltro('sin-stock')" [class.active]="filtro === 'sin-stock'">
+      Sin stock
+    </button>
+    <button (click)="setFiltro('bajo')" [class.active]="filtro === 'bajo'">
+      Bajo
+    </button>
+    <button (click)="setFiltro('crítico')" [class.active]="filtro === 'crítico'">
+      Crítico
+    </button>
+  </div>
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <div class="lista">
+    <app-tarjeta-inventario
+      *ngFor="let item of inventario$ | async"
+      [item]="item"
+      (verDetalle)="irDetalle(item.id)"
+      (ajustar)="api.can('ajustes_write') ? irAjuste(item.id) : null"
+    >
+    </app-tarjeta-inventario>
+  </div>
+
+</section>
+<ng-template #sinPermiso>
+  <div class="sin-permiso">
+    <h2>No tienes permiso para ver el inventario.</h2>
+  </div>
+</ng-template>

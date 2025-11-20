@@ -1,0 +1,165 @@
+.product-form {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 25px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  color: #e5edf3;
+  font-family: "Inter", sans-serif;
+
+  /* Título */
+  h2 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  /* ======================= */
+  /* Formulario */
+  /* ======================= */
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+
+    /* Form group */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #cfd9e2;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 10px 14px;
+        font-size: 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(4px);
+        color: #e5edf3;
+        outline: none;
+        transition: 0.25s;
+
+        &:focus {
+          border-color: #1ea7ff;
+          box-shadow: 0 0 8px rgba(30, 167, 255, 0.35);
+        }
+      }
+
+      textarea {
+        resize: none;
+      }
+
+      /* Mensaje de error */
+      .error {
+        font-size: 12px;
+        color: #ff6b6b;
+        margin-top: -2px;
+      }
+    }
+
+    /* Hacer algunos campos más grandes */
+    textarea,
+    #descripcion,
+    #nombre {
+      grid-column: span 2;
+    }
+
+    /* Acciones */
+    .acciones {
+      grid-column: span 2;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 10px;
+
+      .btn-save,
+      .btn-cancel {
+        padding: 12px 25px;
+        font-size: 15px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+        border: none;
+      }
+
+      .btn-save {
+        background: linear-gradient(135deg, #1ea7ff, #0074d9);
+        color: #ffffff;
+        box-shadow: 0 4px 15px rgba(0, 140, 255, 0.4);
+
+        &:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(0, 140, 255, 0.55);
+        }
+
+        &:disabled {
+          background: rgba(255, 255, 255, 0.15);
+          color: #9fb4c4;
+          cursor: not-allowed;
+        }
+      }
+
+      .btn-cancel {
+        background: rgba(255, 255, 255, 0.12);
+        color: #d8e4ec;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.20);
+        }
+      }
+    }
+  }
+}
+
+/* ===========================================================
+   RESPONSIVE (width < 600px) IGUAL QUE TU DASHBOARD
+=========================================================== */
+@media (width < 600px) {
+  .product-form {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 18px;
+
+    form {
+      grid-template-columns: 1fr;
+      gap: 15px;
+
+      .form-group {
+        input,
+        select,
+        textarea {
+          font-size: 13px;
+          padding: 9px 12px;
+        }
+      }
+
+      .acciones {
+        flex-direction: column;
+
+        .btn-save,
+        .btn-cancel {
+          width: 100%;
+          text-align: center;
+          padding: 12px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<article class="tarjeta" (click)="verDetalle.emit(item.id)">
+  
+  <div class="content">
+    <h4>{{ item.nombreProducto }}</h4>
+    <p class="codigo">{{ item.codigoProducto }}</p>
+    <p class="ubicacion">Ubicación: <strong>{{ item.ubicacion || '—' }}</strong></p>
+  </div>
+
+  <div class="right">
+    <span class="cantidad" [ngClass]="estadoClase(item.estadoStock)">
+      {{ item.cantidadActual }}
+    </span>
+
+    <button
+      *ngIf="puedeAjustar"
+      class="btn-ajustar"
+      (click)="ajustar.emit(item.id); $event.stopPropagation()"
+    >
+      Ajustar
+    </button>
+  </div>
+
+</article>

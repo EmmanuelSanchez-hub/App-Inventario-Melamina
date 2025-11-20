@@ -1,0 +1,155 @@
+.tarjeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 20px;
+  min-height: 140px;              /* ← MISMA ALTURA SIEMPRE */
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: 0.25s ease;
+  position: relative;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.10);
+    transform: translateY(-3px);
+  }
+
+  /* -------------------------------------- */
+  /* CONTENIDO IZQUIERDO */
+  /* -------------------------------------- */
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 70%;                 /* ← Mantiene alto uniforme */
+
+    h4 {
+      font-size: 17px;
+      font-weight: 600;
+      color: #fff;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .codigo {
+      font-size: 14px;
+      color: #9bb5c7;
+      margin: 0;
+    }
+
+    .ubicacion {
+      font-size: 13.5px;
+      color: #c8d7e2;
+      margin-top: auto;        /* ← Alineación perfecta */
+
+      strong {
+        color: #fff;
+      }
+    }
+  }
+
+  /* -------------------------------------- */
+  /* PANEL DERECHO (STOCK + BOTÓN) */
+  /* -------------------------------------- */
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    width: 30%;
+
+    .cantidad {
+      font-size: 22px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 12px;
+
+      &.normal {
+        background: rgba(0, 200, 120, 0.2);
+        color: #00e68a;
+        border: 1px solid rgba(0, 200, 120, 0.35);
+      }
+
+      &.bajo {
+        background: rgba(255, 170, 0, 0.2);
+        color: #ffbb33;
+        border: 1px solid rgba(255, 170, 0, 0.35);
+      }
+
+      &.critico {
+        background: rgba(255, 77, 77, 0.2);
+        color: #ff4d4d;
+        border: 1px solid rgba(255, 77, 77, 0.40);
+      }
+    }
+
+    .btn-ajustar {
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 12px;
+
+      background: linear-gradient(135deg, #1ea7ff, #0074d9);
+      border: none;
+      color: white;
+      cursor: pointer;
+
+      transition: 0.25s ease;
+      box-shadow: 0 3px 10px rgba(0, 140, 255, 0.3);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 14px rgba(0, 140, 255, 0.45);
+      }
+    }
+  }
+}
+
+/* ===========================================================
+   RESPONSIVE — MÓVIL (width < 600px)
+=========================================================== */
+@media (width < 600px) {
+  .tarjeta {
+    flex-direction: column;
+    min-height: auto;        /* ← Se adapta mejor al contenido */
+    gap: 12px;
+
+    padding: 16px;
+
+    .content {
+      width: 100%;
+
+      h4 {
+        font-size: 16px;
+      }
+
+      .codigo {
+        font-size: 13px;
+      }
+    }
+
+    .right {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .cantidad {
+        font-size: 18px;
+        padding: 5px 12px;
+      }
+
+      .btn-ajustar {
+        font-size: 12.5px;
+        padding: 6px 10px;
+        border-radius: 10px;
+      }
+    }
+  }
+}

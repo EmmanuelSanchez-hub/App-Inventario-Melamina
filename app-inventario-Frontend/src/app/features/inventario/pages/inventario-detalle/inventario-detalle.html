@@ -1,0 +1,100 @@
+<div class="detalle-container">
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <ng-container *ngIf="inventario$ | async as item">
+
+    <div class="card glass">
+
+      <h2 class="titulo">{{ item.nombreProducto }}</h2>
+      <p class="subtitulo">{{ item.codigoProducto }}</p>
+
+      <div class="seccion">
+        <p class="label">Cantidad actual</p>
+        <p class="valor">{{ item.cantidadActual }}</p>
+      </div>
+
+      <div class="seccion">
+        <p class="label">Stock mínimo</p>
+        <p class="valor">{{ item.stockMinimo }}</p>
+      </div>
+
+      <div class="seccion">
+        <p class="label">Estado</p>
+        <p class="badge" [ngClass]="item.estadoStock.toLowerCase()">
+          {{ item.estadoStock }}
+        </p>
+      </div>
+
+      <!-- UBICACIÓN EDITABLE -->
+      <div class="seccion">
+        <p class="label">Ubicación</p>
+
+        <!-- MODO LECTURA -->
+        <ng-container *ngIf="!editandoUbicacion; else modoEdicion">
+          <p class="valor">{{ item.ubicacion || '—' }}</p>
+
+          <button 
+            class="btn-mini"
+            *ngIf="puedeAjustar"
+            (click)="activarEdicionUbicacion(item.ubicacion)"
+          >
+            Editar
+          </button>
+        </ng-container>
+
+        <!-- MODO EDICIÓN -->
+        <ng-template #modoEdicion>
+          <input 
+            type="text" 
+            [(ngModel)]="nuevaUbicacion"
+            class="input-ubicacion"
+            placeholder="Nueva ubicación"
+          />
+
+          <div class="minibotones">
+            <button class="btn-cancelar" (click)="cancelarEdicion()">Cancelar</button>
+            <button class="btn-guardar" (click)="guardarUbicacion(item)">Guardar</button>
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="seccion">
+        <p class="label">Categoría</p>
+        <p class="valor">{{ item.categoria }}</p>
+      </div>
+
+      <div class="seccion">
+        <p class="label">Valor unitario</p>
+        <p class="valor">S/ {{ item.valorUnitario | number:'1.2-2' }}</p>
+      </div>
+
+      <div class="seccion">
+        <p class="label">Valor total</p>
+        <p class="valor destacado">
+          S/ {{ item.valorTotal | number:'1.2-2' }}
+        </p>
+      </div>
+
+      <div class="seccion">
+        <p class="label">Última actualización</p>
+        <p class="valor">{{ item.ultimaActualizacion | date:'short' }}</p>
+      </div>
+
+      <!-- ACCIONES -->
+      <div class="acciones">
+        <button class="btn volver" (click)="volver()">Volver</button>
+
+        <button 
+          class="btn ajustar"
+          *ngIf="puedeAjustar"
+          (click)="ajustar(item)"
+        >
+          Ajustar Stock
+        </button>
+      </div>
+
+    </div>
+
+  </ng-container>
+</div>

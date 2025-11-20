@@ -1,0 +1,66 @@
+<div class="ajuste-container">
+
+  <!-- Error general -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <!-- Mensaje éxito -->
+  <p class="mensaje" *ngIf="mensaje">{{ mensaje }}</p>
+
+  <!-- Cargando -->
+  <p class="cargando" *ngIf="cargando && !error">Cargando...</p>
+
+  <ng-container *ngIf="!cargando && !error && inventario">
+
+    <div class="card glass">
+
+      <h2 class="titulo">Ajustar stock</h2>
+      <p class="subtitulo">{{ inventario.nombreProducto }}</p>
+      <p class="codigo">{{ inventario.codigoProducto }}</p>
+
+      <!-- Info actual -->
+      <div class="panel-actual">
+        <div class="item">
+          <span class="label">Stock actual</span>
+          <span class="valor">{{ inventario.cantidadActual }}</span>
+        </div>
+        <div class="item">
+          <span class="label">Stock mínimo</span>
+          <span class="valor">{{ inventario.stockMinimo }}</span>
+        </div>
+        <div class="item">
+          <span class="label">Estado</span>
+          <span class="badge" [ngClass]="inventario.estadoStock.toLowerCase()">
+            {{ inventario.estadoStock }}
+          </span>
+        </div>
+      </div>
+
+      <!-- FORMULARIO -->
+      <form [formGroup]="form" (ngSubmit)="guardar()" class="form-ajuste">
+
+        <label for="cantidad">Nueva cantidad</label>
+        <input
+          id="cantidad"
+          type="number"
+          formControlName="cantidad"
+          [class.invalido]="form.get('cantidad')?.invalid && form.get('cantidad')?.touched"
+        />
+
+        <p class="error-campo" *ngIf="form.get('cantidad')?.invalid && form.get('cantidad')?.touched">
+          La cantidad debe ser un número mayor o igual a 0.
+        </p>
+
+        <div class="acciones">
+          <button type="button" class="btn cancelar" (click)="cancelar()">
+            Cancelar
+          </button>
+          <button type="submit" class="btn guardar" [disabled]="form.invalid">
+            Guardar ajuste
+          </button>
+        </div>
+      </form>
+
+    </div>
+
+  </ng-container>
+</div>

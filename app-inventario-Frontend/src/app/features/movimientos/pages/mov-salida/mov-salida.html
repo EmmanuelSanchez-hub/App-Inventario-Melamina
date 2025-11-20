@@ -1,0 +1,158 @@
+<section class="mov-form venta-pos" *ngIf="api.can('ventas_write'); else sinPermiso">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="titulo">
+      <span class="material-icons">point_of_sale</span>
+      <h2>Registrar Venta</h2>
+    </div>
+    <p class="subtitulo">Procesa una venta rápida seleccionando cliente y productos.</p>
+  </header>
+
+
+  <form [formGroup]="form" (ngSubmit)="guardar()" class="card">
+
+    <div class="bloque">
+
+      <h3 class="bloque-titulo">
+        <span class="material-icons">person</span>
+        Cliente
+      </h3>
+      
+      <div class="form-group full">
+        <label>Buscar cliente</label>
+        <div class="input-icon">
+          <span class="material-icons">search</span>
+          <input 
+            type="text"
+            placeholder="Buscar por nombre o documento..."
+            [formControl]="buscarCliente"
+          />
+        </div>
+
+        <ul *ngIf="clientes.length > 0" class="resultados">
+          <li *ngFor="let c of clientes" (click)="seleccionarCliente(c)">
+            <strong>{{ c.nombres }} {{ c.apellidos }}</strong>
+            <small>{{ c.numeroDocumento }}</small>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cliente-info full" *ngIf="clienteSeleccionado">
+        <span class="material-icons">account_circle</span>
+        <div>
+          <h4>{{ clienteSeleccionado.nombres }} {{ clienteSeleccionado.apellidos }}</h4>
+          <p class="doc">{{ clienteSeleccionado.numeroDocumento }}</p>
+        </div>
+        <button class="btn-mini" (click)="clienteSeleccionado = null">
+          Cambiar
+        </button>
+      </div>
+
+    </div>
+
+    <div class="bloque">
+
+      <h3 class="bloque-titulo">
+        <span class="material-icons">inventory_2</span>
+        Productos
+      </h3>
+
+      <div class="form-group full">
+        <label>Agregar producto</label>
+        <div class="input-icon">
+          <span class="material-icons">search</span>
+          <input 
+            type="text"
+            placeholder="Buscar por código o nombre..."
+            [formControl]="buscarProducto"
+          />
+        </div>
+
+        <ul *ngIf="productos.length > 0" class="resultados">
+          <li *ngFor="let p of productos" (click)="seleccionarProducto(p)">
+            <strong>{{ p.codigo }}</strong> - {{ p.nombre }}
+            <span class="precio">S/ {{ p.precioVenta }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="carrito full" *ngIf="carrito.length > 0">
+
+        <div class="item" *ngFor="let item of carrito; let i = index">
+
+          <div class="info">
+            <h4>{{ item.nombre }}</h4>
+            <p class="codigo">{{ item.productoId }}</p>
+            <span class="precio-unit">S/ {{ item.precioUnitario }}</span>
+          </div>
+
+          <div class="cantidad">
+            <button class="qty-btn" (click)="cambiarCantidad(item, item.cantidad - 1)">-</button>
+            <input type="number" min="1" [value]="item.cantidad" (input)="cambiarCantidad(item, +$event.target.value)" />
+            <button class="qty-btn" (click)="cambiarCantidad(item, item.cantidad + 1)">+</button>
+          </div>
+
+          <div class="subtotal">
+            S/ {{ item.subtotal | number:'1.2-2' }}
+          </div>
+
+          <button class="remove" (click)="eliminarItem(i)">
+            <span class="material-icons">delete</span>
+          </button>
+
+        </div>
+
+        <hr />
+
+        <div class="totales">
+          <div>Total:</div>
+          <div class="monto">S/ {{ totalVenta | number:'1.2-2' }}</div>
+        </div>
+
+        <div class="pago">
+          <label>Pago del cliente</label>
+          <input type="number" formControlName="pago" />
+        </div>
+
+        <div class="vuelto">
+          <label>Vuelto</label>
+          <div class="monto-vuelto">
+            S/ {{ vuelto | number:'1.2-2' }}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="form-group full">
+      <label>Observaciones</label>
+      <textarea rows="2" formControlName="observaciones"></textarea>
+    </div>
+
+    <div class="acciones full">
+      <button class="btn btn-secundario" type="button" routerLink="/movimientos">
+        <span class="material-icons">arrow_back</span>
+        Cancelar
+      </button>
+
+      <button 
+        class="btn btn-primario" 
+        type="submit" 
+        [disabled]="form.invalid || carrito.length === 0"
+        *ngIf="api.can('ventas_write')">
+        <span class="material-icons">shopping_bag</span>
+        Confirmar Venta
+      </button>
+    </div>
+
+  </form>
+
+</section>
+
+<ng-template #sinPermiso>
+  <div class="sin-permiso">
+    <h2>No tienes permiso para registrar ventas.</h2>
+  </div>
+</ng-template>

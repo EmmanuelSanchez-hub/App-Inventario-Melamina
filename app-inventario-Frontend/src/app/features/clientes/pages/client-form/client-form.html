@@ -1,0 +1,136 @@
+<section class="cliente-form">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h2>{{ editMode ? 'Editar Cliente' : 'Registrar Cliente' }}</h2>
+    </div>
+
+    <!-- CARD DEL FORMULARIO -->
+    <form [formGroup]="form" (ngSubmit)="guardar()" class="card">
+
+        <!-- TIPO DOCUMENTO -->
+        <div class="form-group">
+            <label>Tipo de Documento</label>
+            <select formControlName="tipoDocumento">
+                <option value="DNI">DNI</option>
+                <option value="CE">CE</option>
+                <option value="RUC">RUC</option>
+            </select>
+        </div>
+
+        <!-- NUMERO DOCUMENTO -->
+        <div class="form-group">
+            <label>Número Documento</label>
+            <input type="text" formControlName="numeroDocumento" />
+
+            <p class="error" *ngIf="form.get('numeroDocumento')?.touched && form.get('numeroDocumento')?.invalid">
+
+                <span *ngIf="form.get('numeroDocumento')?.errors?.['dniInvalido']">
+                    El DNI debe tener exactamente 8 dígitos.
+                </span>
+
+                <span *ngIf="form.get('numeroDocumento')?.errors?.['ceInvalido']">
+                    El CE debe tener entre 8 y 12 dígitos.
+                </span>
+
+                <span *ngIf="form.get('numeroDocumento')?.errors?.['rucLongitudInvalida']">
+                    El RUC debe tener exactamente 11 dígitos.
+                </span>
+
+                <span *ngIf="form.get('numeroDocumento')?.errors?.['rucPrefijoInvalido']">
+                    El RUC debe tener un formato válido.
+                </span>
+
+            </p>
+        </div>
+
+        <!-- NOMBRES -->
+        <div class="form-group">
+            <label>Nombres</label>
+            <input type="text" formControlName="nombres" />
+
+            <p class="error" *ngIf="form.get('nombres')?.touched && form.get('nombres')?.invalid">
+                <span *ngIf="form.get('nombres')?.errors?.['required']">El nombre es obligatorio.</span>
+                <span *ngIf="form.get('nombres')?.errors?.['minlength']">El nombre es demasiado corto.</span>
+            </p>
+        </div>
+
+        <!-- APELLIDOS -->
+        <div class="form-group">
+            <label>Apellidos</label>
+            <input type="text" formControlName="apellidos" />
+
+            <p class="error" *ngIf="form.get('apellidos')?.touched && form.get('apellidos')?.invalid">
+                <span *ngIf="form.get('apellidos')?.errors?.['required']">Los apellidos son obligatorios.</span>
+                <span *ngIf="form.get('apellidos')?.errors?.['minlength']">Los apellidos son demasiado cortos.</span>
+            </p>
+        </div>
+
+        <!-- RAZÓN SOCIAL (solo si RUC) -->
+        <div class="form-group" *ngIf="form.get('tipoDocumento')?.value === 'RUC'">
+            <label>Razón Social</label>
+            <input type="text" formControlName="razonSocial" />
+
+            <p class="error" *ngIf="form.get('razonSocial')?.touched && form.get('razonSocial')?.invalid">
+                <span *ngIf="form.get('razonSocial')?.errors?.['razonSocialRequerida']">
+                    La razón social es obligatoria para RUC.
+                </span>
+            </p>
+        </div>
+
+        <!-- TELEFONO -->
+        <div class="form-group">
+            <label>Teléfono</label>
+            <input type="text" formControlName="telefono" />
+
+            <p class="error" *ngIf="form.get('telefono')?.touched && form.get('telefono')?.invalid">
+                <span *ngIf="form.get('telefono')?.errors?.['required']">El teléfono es obligatorio.</span>
+                <span *ngIf="form.get('telefono')?.errors?.['pattern']">Debe contener exactamente 9 dígitos.</span>
+            </p>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" formControlName="email" />
+
+            <p class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+                <span *ngIf="form.get('email')?.errors?.['email']">El email no es válido.</span>
+            </p>
+        </div>
+
+        <!-- DIRECCIÓN -->
+        <div class="form-group">
+            <label>Dirección</label>
+            <input type="text" formControlName="direccion" />
+        </div>
+
+        <!-- CIUDAD -->
+        <div class="form-group">
+            <label>Ciudad</label>
+            <input type="text" formControlName="ciudad" />
+        </div>
+
+        <!-- ACTIVO (solo se muestra en modo edición) -->
+        <div class="form-group" *ngIf="editMode">
+            <label for="activo">Estado</label>
+            <select id="activo" formControlName="activo">
+                <option [value]="true">Activo</option>
+                <option [value]="false">Inactivo</option>
+            </select>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="acciones">
+            <button class="btn-save" type="submit">
+                {{ editMode ? 'Actualizar Cliente' : 'Registrar Cliente' }}
+            </button>
+
+            <button class="btn-cancel" type="button" routerLink="/clientes">
+                Cancelar
+            </button>
+        </div>
+
+    </form>
+
+</section>

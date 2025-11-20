@@ -1,0 +1,83 @@
+<section class="mov-list">
+  <header class="top-actions">
+    <button 
+      class="action-btn entrada" 
+      routerLink="entrada"
+      *ngIf="api.can('compras_write')">
+      <span class="material-icons">shopping_cart</span>
+      Compra
+    </button>
+    <button 
+      class="action-btn salida" 
+      routerLink="salida"
+      *ngIf="api.can('ventas_write')">
+      <span class="material-icons">point_of_sale</span>
+      Venta
+    </button>
+    <button 
+      class="action-btn ajuste" 
+      routerLink="ajuste"
+      *ngIf="api.can('ajustes_write')">
+      <span class="material-icons">tune</span>
+      Ajuste
+    </button>
+
+  </header>
+  <div class="header-title">
+    <h2>Movimientos de Inventario</h2>
+    <p class="sub">
+      Registros de entradas, salidas y ajustes de productos.
+    </p>
+  </div>
+  <div class="card tabla-wrapper" *ngIf="api.can('movimientos_read')">
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Tipo</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+          <th>Cliente / Proveedor</th>
+          <th>Usuario</th>
+          <th>Obs.</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let m of movimientos$ | async">
+
+          <td>{{ m.fechaMovimiento | date:'short' }}</td>
+
+          <td>
+            <span class="badge" [ngClass]="getTipoMovimiento(m.tipoMovimiento)">
+              {{ convertirTipo(m.tipoMovimiento) }}
+            </span>
+          </td>
+
+          <td>{{ m.nombreProducto }}</td>
+
+          <td>{{ m.cantidad }}</td>
+
+          <td>S/ {{ m.total | number:'1.2-2' }}</td>
+
+          <td>
+            <ng-container [ngSwitch]="m.tipoMovimiento">
+              <span *ngSwitchCase="'ENTRADA'">{{ m.proveedor }}</span>
+              <span *ngSwitchCase="'SALIDA'">{{ m.cliente }}</span>
+              <span *ngSwitchDefault>-</span>
+            </ng-container>
+          </td>
+
+          <td>{{ m.usuario }}</td>
+
+          <td class="obs-col">
+            {{ m.observaciones || '-' }}
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>

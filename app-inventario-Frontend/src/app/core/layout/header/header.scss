@@ -1,0 +1,247 @@
+.header {
+  width: 100%;
+  height: 64px;
+  background: linear-gradient(135deg, #0d1f2d, #143044);
+  color: #e5edf3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+
+  /* =============== LOGO =============== */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(4px);
+      transition: 0.25s;
+
+      .material-icons {
+        font-size: 22px;
+        color: #1ea7ff;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+    }
+
+    .label {
+      font-size: 20px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+  }
+
+  /* =============== NAV =============== */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 55%;
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(4px);
+      transition: 0.22s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.25);
+
+        .material-icons,
+        .label {
+          color: #fff;
+        }
+      }
+
+      .icon-btn {
+        width: 30px;
+        height: 30px;
+        border: none;
+        background: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .material-icons {
+          font-size: 20px;
+          color: #d6e1e7;
+          transition: 0.25s;
+        }
+      }
+
+      .label {
+        font-size: 14px;
+        color: #d6e1e7;
+        white-space: nowrap;
+      }
+
+      .arrow {
+        font-size: 16px;
+        color: #d6e1e7;
+        transition: 0.25s;
+      }
+
+      &.open .arrow {
+        transform: rotate(180deg);
+      }
+
+      /* =============== SUBMENU =============== */
+      .drop-menu {
+        display: none;
+        position: absolute;
+        top: 46px;
+        left: 0;
+        min-width: 170px;
+        background: #102536;
+        border-radius: 12px;
+        padding: 8px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+        .sub-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 12px;
+          transition: 0.22s;
+          border-radius: 8px;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.15);
+          }
+
+          .icon-btn {
+            width: 28px;
+            height: 28px;
+
+            .material-icons {
+              font-size: 18px;
+              color: #cfd8e3;
+            }
+          }
+
+          .label {
+            font-size: 13px;
+          }
+        }
+      }
+
+      &.open .drop-menu {
+        display: block;
+      }
+    }
+  }
+
+  /* =============== USER =============== */
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .username {
+      font-size: 14px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      transition: 0.25s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .material-icons {
+        color: #ff6b6b;
+        font-size: 19px;
+      }
+
+      &:hover {
+        background: rgba(255, 77, 77, 0.25);
+        border-color: rgba(255, 77, 77, 0.35);
+        .material-icons {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+/* ===========================================================
+   RESPONSIVE: UNA SOLA REGLA (width < 600px)
+=========================================================== */
+@media (width < 600px) {
+  .header {
+    height: 50px;
+    padding: 0 10px;
+
+    .logo .label {
+      display: none;
+    }
+
+    .nav-links {
+      gap: 10px;
+    }
+
+    .menu-item {
+      padding: 4px 6px;
+
+      .label,
+      .arrow {
+        display: none;
+      }
+
+      .icon-btn {
+        width: 32px;
+        height: 32px;
+
+        .material-icons {
+          font-size: 20px;
+        }
+      }
+
+      .drop-menu .label {
+        display: none;
+      }
+    }
+
+    .user-info .username {
+      display: none;
+    }
+
+    .user-info .icon-btn {
+      width: 32px;
+      height: 32px;
+
+      .material-icons {
+        font-size: 17px;
+      }
+    }
+  }
+}

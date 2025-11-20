@@ -1,0 +1,113 @@
+<section class="dashboard">
+
+  <!-- Controles de rango -->
+  <header class="toolbar">
+    <button class="btn" (click)="setRango(7)">Últimos 7 días</button>
+    <button class="btn" (click)="setRango(30)">Últimos 30 días</button>
+    <button class="btn" (click)="setRango(90)">Últimos 90 días</button>
+  </header>
+
+  <!-- Tarjetas de KPIs principales -->
+  <div class="kpis" *ngIf="kpis$ | async as k; else loading">
+    <article class="kpi" *ngIf="api.can('inventario_read')">
+      <h4>Valor total de inventario</h4>
+      <p class="value">S/ {{ k.valorInventarioTotal | number:'1.2-2' }}</p>
+    </article>
+
+    <article class="kpi" *ngIf="api.can('productos_read')">
+      <h4>Productos con stock bajo</h4>
+      <p class="value warning">{{ k.productosStockBajo }}</p>
+    </article>
+
+    <article class="kpi" *ngIf="api.can('productos_read')" >
+      <h4>Productos sin stock</h4>
+      <p class="value danger">{{ k.productosSinStock }}</p>
+    </article>
+
+    <article class="kpi" *ngIf="api.can('clientes_read')">
+      <h4>Clientes activos</h4>
+      <p class="value">{{ k.clientesActivos }}</p>
+    </article>
+
+    <article class="kpi" *ngIf="api.can('proveedores_read')">
+      <h4>Proveedores activos</h4>
+      <p class="value">{{ k.proveedoresActivos }}</p>
+    </article>
+
+    <article class="kpi" *ngIf="api.can('ventas_read')">
+      <h4>Ventas en el rango</h4>
+      <p class="value success">S/ {{ k.ventasPeriodo | number:'1.2-2' }}</p>
+    </article>
+  </div>
+
+  <ng-template #loading>
+    <div class="loading">Cargando datos del Dashboard...</div>
+  </ng-template>
+  <!--     GRÁFICO PRINCIPAL       -->
+  <div class="chart-card" *ngIf="api.can('ventas_read')">
+  <apx-chart
+    #chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [stroke]="chartOptions.stroke"
+    [fill]="chartOptions.fill"
+    [xaxis]="chartOptions.xaxis"
+    [grid]="chartOptions.grid">
+  </apx-chart>
+</div>
+
+
+  <!-- Listas de productos -->
+  <div class="lists">
+
+    <section *ngIf="api.can('productos_read')">
+      <h3>Productos sin stock</h3>
+      <table *ngIf="sinStock$ | async as items; else loadSinStock">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of items">
+            <td>{{ p.codigo }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.categoria }}</td>
+            <td>{{ p.stockActual ?? 0 }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #loadSinStock><div class="loading">Cargando productos...</div></ng-template>
+    </section>
+
+    <section *ngIf="api.can('productos_read')">
+      <h3>Productos con stock bajo</h3>
+      <table *ngIf="stockBajo$ | async as items; else loadStockBajo">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Stock</th>
+            <th>Mínimo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of items">
+            <td>{{ p.codigo }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.categoria }}</td>
+            <td>{{ p.stockActual }}</td>
+            <td>{{ p.stockMinimo }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #loadStockBajo><div class="loading">Cargando productos...</div></ng-template>
+    </section>
+
+  </div>
+
+</section>

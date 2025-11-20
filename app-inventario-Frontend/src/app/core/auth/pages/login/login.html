@@ -1,0 +1,59 @@
+<div class="login-container">
+
+  <div class="login-card glass">
+    
+    <div class="left-panel">
+      <div class="logo">
+        <span class="material-icons">business</span>
+      </div>
+
+      <h1 class="brand">CesarCort</h1>
+
+      <p class="desc">
+        Gestión inteligente para decisiones empresariales.
+      </p>
+    </div>
+
+    <!-- PANEL DERECHO · Formulario -->
+    <div class="right-panel">
+
+      <h2>Bienvenido</h2>
+      <p class="sub">Ingresa tus credenciales para continuar</p>
+
+      <form [formGroup]="form" (ngSubmit)="login()">
+
+        <!-- USUARIO -->
+        <div class="form-group">
+          <label>Usuario</label>
+          <div class="input-icon">
+            <span class="material-icons">person</span>
+            <input type="text" formControlName="username" placeholder="Ingrese su usuario" />
+          </div>
+          <small *ngIf="form.controls.username.touched && form.controls.username.invalid">
+            El usuario es obligatorio
+          </small>
+        </div>
+
+        <!-- CONTRASEÑA -->
+        <div class="form-group">
+          <label>Contraseña</label>
+          <div class="input-icon">
+            <span class="material-icons">lock</span>
+            <input type="password" formControlName="password" placeholder="Ingrese su contraseña" />
+          </div>
+          <small *ngIf="form.controls.password.touched && form.controls.password.invalid">
+            La contraseña es obligatoria
+          </small>
+        </div>
+
+        <!-- BOTÓN -->
+        <button class="btn-login" type="submit" [disabled]="form.invalid">
+          Ingresar
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>

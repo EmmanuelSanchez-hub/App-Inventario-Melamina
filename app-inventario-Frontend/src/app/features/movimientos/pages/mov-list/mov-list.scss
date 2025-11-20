@@ -1,0 +1,230 @@
+.mov-list {
+  max-width: 1280px;
+  margin: 12px auto;
+  padding: 25px;
+
+  background: linear-gradient(180deg, #0d1f2d, #143044);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  color: #e5edf3;
+  font-family: "Inter", sans-serif;
+
+
+  /* =======================================================
+     ACCIONES SUPERIORES
+  ======================================================= */
+  .top-actions {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 14px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 140, 255, 0.3);
+
+      .material-icons {
+        font-size: 20px;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 140, 255, 0.45);
+      }
+    }
+
+    /* Entrada (Compra) */
+    .entrada {
+      background: linear-gradient(135deg, #00c46a, #00994f);
+      box-shadow: 0 4px 12px rgba(0, 196, 106, 0.35);
+    }
+
+    /* Salida (Venta) */
+    .salida {
+      background: linear-gradient(135deg, #ff6b6b, #d94343);
+      box-shadow: 0 4px 12px rgba(255, 77, 77, 0.35);
+    }
+
+    /* Ajuste */
+    .ajuste {
+      background: linear-gradient(135deg, #1ea7ff, #0074d9);
+      box-shadow: 0 4px 12px rgba(0, 140, 255, 0.35);
+    }
+  }
+
+
+  /* =======================================================
+     TÍTULO
+  ======================================================= */
+  .header-title {
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 26px;
+      font-weight: 600;
+      margin: 0;
+      color: #fff;
+    }
+
+    .sub {
+      font-size: 14px;
+      margin-top: 4px;
+      color: #bcd5e0;
+    }
+  }
+
+
+  /* =======================================================
+     TABLA
+  ======================================================= */
+  .tabla-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    padding: 20px;
+    overflow-x: auto;
+
+    /* Scroll para móvil */
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #1ea7ff;
+      border-radius: 3px;
+    }
+  }
+
+  .tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    white-space: nowrap;
+
+    thead {
+      background: rgba(255, 255, 255, 0.08);
+
+      th {
+        padding: 12px 10px;
+        color: #d7e4ea;
+        font-weight: 600;
+        text-align: left;
+      }
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: 0.25s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      td {
+        padding: 12px 10px;
+        color: #eef4f7;
+      }
+    }
+
+    .obs-col {
+      max-width: 220px;
+      white-space: normal;
+    }
+  }
+
+
+  /* =======================================================
+     BADGES
+  ======================================================= */
+  .badge {
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+
+    &.entrada {
+      background: rgba(0, 196, 106, 0.18);
+      color: #00e68a;
+      border: 1px solid rgba(0, 196, 106, 0.3);
+    }
+
+    &.salida {
+      background: rgba(255, 77, 77, 0.18);
+      color: #ff6b6b;
+      border: 1px solid rgba(255, 77, 77, 0.35);
+    }
+
+    &.ajuste {
+      background: rgba(30, 167, 255, 0.18);
+      color: #1ea7ff;
+      border: 1px solid rgba(30, 167, 255, 0.35);
+    }
+  }
+}
+
+
+/* ===========================================================
+   RESPONSIVE — width < 600px
+=========================================================== */
+
+@media (width < 600px) {
+  .mov-list {
+    padding: 15px;
+    margin: 8px;
+    border-radius: 18px;
+
+    .top-actions {
+      flex-direction: column;
+
+      .action-btn {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 14px;
+        border-radius: 12px;
+
+        .material-icons {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .header-title h2 {
+      font-size: 22px;
+    }
+
+    .tabla-wrapper {
+      padding: 15px;
+    }
+
+    .tabla th,
+    .tabla td {
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 8px;
+    }
+
+    .obs-col {
+      max-width: 160px;
+    }
+  }
+}

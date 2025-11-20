@@ -1,0 +1,46 @@
+/* ===========================================================
+   RESET GLOBAL SEGURO
+   =========================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Evitar scroll horizontal */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: #0e2235; /* Fondo base compatible con tu layout */
+}
+
+/* ===========================================================
+   ROOT APP
+   =========================================================== */
+
+app-root {
+  display: block;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* No afectar headers, main ni footers globalmente */
+app-header,
+app-footer,
+main {
+  display: block;
+  width: 100%;
+}
+
+/* ===========================================================
+   PROTECCIÓN CONTRA ESTILOS EXTERNOS
+   =========================================================== */
+
+/* Si algo limita tu main (Bootstrap, plantillas, etc)
+   esto lo corrige automáticamente */
+main {
+  max-width: 100% !important;
+  width: 100% !important;
+}

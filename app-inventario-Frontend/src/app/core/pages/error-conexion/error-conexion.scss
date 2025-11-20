@@ -1,0 +1,100 @@
+.conexion-error {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f0f3f7, #e8ecf2);
+  animation: fadeIn .6s ease;
+
+  .card {
+    background: white;
+    padding: 3rem 4rem;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.10);
+    text-align: center;
+    max-width: 450px;
+    animation: slideUp .5s ease;
+
+    .icon {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+
+      .wave {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 3px solid #d9534f;
+        border-radius: 50%;
+        opacity: 0;
+        animation: pulse 2s infinite ease-out;
+      }
+
+      .wave1 { animation-delay: 0s; }
+      .wave2 { animation-delay: .4s; }
+      .wave3 { animation-delay: .8s; }
+
+      .slash {
+        position: absolute;
+        inset: 0;
+        font-size: 4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #d9534f;
+        font-weight: bold;
+        animation: pop .5s ease;
+      }
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      color: #d9534f;
+      margin-bottom: .8rem;
+    }
+
+    p {
+      margin: 0.2rem 0 .8rem;
+      color: #555;
+    }
+
+    button {
+      padding: 0.7rem 2.2rem;
+      border: none;
+      border-radius: 8px;
+      background: #0275d8;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .25s;
+
+      &:hover {
+        background: #025aa5;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+/* Animaciones */
+@keyframes pulse {
+  0% { transform: scale(0.4); opacity: 0.9; }
+  70% { transform: scale(1.3); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}

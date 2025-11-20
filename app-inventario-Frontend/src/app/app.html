@@ -1,0 +1,6 @@
+<ng-container *ngIf="isLoginPage; else mainLayout">
+  <router-outlet></router-outlet>
+</ng-container>
+<ng-template #mainLayout>
+  <app-main-layout></app-main-layout>
+</ng-template>

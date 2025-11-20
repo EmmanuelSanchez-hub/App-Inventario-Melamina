@@ -1,0 +1,284 @@
+.proveedores {
+  max-width: 1280px;
+  margin: 12px auto;
+  padding: 25px;
+
+  background: linear-gradient(180deg, #0d1f2d, #143044);
+  color: #e5edf3;
+  font-family: "Inter", sans-serif;
+
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+
+  /* ---------------------------- */
+  /* Encabezado */
+  /* ---------------------------- */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+
+    h2 {
+      font-size: 26px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0;
+      letter-spacing: 0.4px;
+    }
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      cursor: pointer;
+
+      background: linear-gradient(135deg, #1ea7ff, #0074d9);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 140, 255, 0.4);
+      transition: 0.25s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 140, 255, 0.55);
+      }
+    }
+  }
+
+  /* ---------------------------- */
+  /* Buscador */
+  /* ---------------------------- */
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 10px 15px;
+    border-radius: 14px;
+    backdrop-filter: blur(4px);
+    margin-bottom: 25px;
+
+    .material-icons {
+      font-size: 20px;
+      color: #9bb5c7;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #eaf3f8;
+
+      font-size: 15px;
+
+      &::placeholder {
+        color: #9bb5c7;
+      }
+    }
+  }
+
+  /* ---------------------------- */
+  /* Tarjeta Contenedora */
+  /* ---------------------------- */
+  .card {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+  }
+
+  /* ---------------------------- */
+  /* Tabla de Proveedores */
+  /* ---------------------------- */
+  .tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+
+    thead {
+      background: rgba(255, 255, 255, 0.08);
+
+      th {
+        padding: 14px 12px;
+        font-weight: 600;
+        color: #d7e4ea;
+        text-align: left;
+        white-space: nowrap;
+        letter-spacing: 0.3px;
+      }
+    }
+
+    tbody {
+      tr {
+        transition: 0.25s;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        td {
+          padding: 12px;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  /* ---------------------------- */
+  /* Badges */
+  /* ---------------------------- */
+  .badge {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .badge-activo {
+    background: rgba(0, 200, 120, 0.2);
+    color: #00e68a;
+    border: 1px solid rgba(0, 200, 120, 0.35);
+  }
+
+  .badge-inactivo {
+    background: rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+    border: 1px solid rgba(255, 77, 77, 0.35);
+  }
+
+  /* ---------------------------- */
+  /* Acciones */
+  /* ---------------------------- */
+  .acciones {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+
+    .icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border: none;
+      background: rgba(255, 255, 255, 0.10);
+      cursor: pointer;
+      transition: 0.22s;
+
+      .material-icons {
+        font-size: 20px;
+      }
+
+      &.edit {
+        color: #1ea7ff;
+
+        &:hover {
+          background: rgba(30, 167, 255, 0.15);
+        }
+      }
+
+      &.delete {
+        color: #ff4d4d;
+
+        &:hover {
+          background: rgba(255, 77, 77, 0.18);
+        }
+      }
+    }
+  }
+
+  /* ---------------------------- */
+  /* Estados */
+  /* ---------------------------- */
+  .empty {
+    text-align: center;
+    color: #c8d4dc;
+    margin-top: 15px;
+  }
+
+  .loading {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    gap: 10px;
+
+    .material-icons {
+      font-size: 22px;
+    }
+  }
+}
+
+/* ===========================================================
+   RESPONSIVE (width < 600px) — IGUAL AL DASHBOARD
+=========================================================== */
+@media (width < 600px) {
+  .proveedores {
+    padding: 15px;
+    margin: 8px;
+    border-radius: 18px;
+
+    * {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .search-box {
+      padding: 10px;
+    }
+
+    .card {
+      padding: 15px;
+    }
+
+    .tabla {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    th,
+    td {
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    .acciones .icon {
+      width: 32px;
+      height: 32px;
+
+      .material-icons {
+        font-size: 18px;
+      }
+    }
+  }
+}

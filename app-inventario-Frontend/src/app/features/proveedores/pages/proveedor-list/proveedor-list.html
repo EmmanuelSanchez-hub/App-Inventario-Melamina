@@ -1,0 +1,91 @@
+<section class="proveedores">
+
+  <div class="header">
+    <h2>Gestión de Proveedores</h2>
+
+    <button 
+      class="btn-primary" 
+      routerLink="/proveedores/nuevo"
+      *ngIf="api.can('proveedores_write')">
+      <span class="material-icons">add</span>
+      Agregar Proveedor
+    </button>
+  </div>
+
+  <div class="search-box" *ngIf="api.can('proveedores_read')">
+    <span class="material-icons">search</span>
+    <input 
+      type="text" 
+      placeholder="Buscar por razón social..." 
+      [(ngModel)]="termino" 
+      (input)="buscar()"
+    />
+  </div>
+
+  <ng-container *ngIf="api.can('proveedores_read')">
+
+    <ng-container *ngIf="proveedores$ | async as proveedores; else cargandoTpl">
+
+      <div class="card">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Razón Social</th>
+              <th>RUC</th>
+              <th>Contacto</th>
+              <th>Teléfono</th>
+              <th>Email</th>
+              <th>Ciudad</th>
+              <th>Estado</th>
+              <th class="acciones-col" *ngIf="api.can('proveedores_write')">Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let p of proveedores">
+
+              <td>{{ p.razonSocial }}</td>
+              <td>{{ p.ruc }}</td>
+              <td>{{ p.contacto }}</td>
+              <td>{{ p.telefono }}</td>
+              <td>{{ p.email }}</td>
+              <td>{{ p.ciudad }}</td>
+
+              <td>
+                <span class="badge" [ngClass]="p.activo ? 'badge-activo' : 'badge-inactivo'">
+                  {{ p.activo ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+
+              <td class="acciones" *ngIf="api.can('proveedores_write')">
+                <button class="icon edit" [routerLink]="['/proveedores/editar', p.id]">
+                  <span class="material-icons">edit</span>
+                </button>
+
+                <button class="icon delete" (click)="eliminar(p.id)">
+                  <span class="material-icons">delete</span>
+                </button>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+        <p *ngIf="proveedores.length === 0" class="empty">
+          No hay proveedores registrados.
+        </p>
+
+      </div>
+
+    </ng-container>
+
+  </ng-container>
+
+  <ng-template #cargandoTpl>
+    <div class="loading">
+      <span class="material-icons">hourglass_empty</span>
+      Cargando...
+    </div>
+  </ng-template>
+
+</section>

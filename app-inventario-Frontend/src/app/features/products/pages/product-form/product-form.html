@@ -1,0 +1,144 @@
+<section class="product-form">
+
+    <h2>{{ editMode ? 'Editar Producto' : 'Registrar Nuevo Producto' }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+
+        <!-- CÓDIGO -->
+        <div class="form-group">
+            <label for="codigo">Código</label>
+            <input type="text" id="codigo" formControlName="codigo" readonly />
+            <p class="error" *ngIf="form.get('codigo')?.invalid && form.get('codigo')?.touched">
+                El código es obligatorio.
+            </p>
+        </div>
+
+        <!-- NOMBRE -->
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" formControlName="nombre" />
+            <p class="error" *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched">
+                El nombre es obligatorio.
+            </p>
+        </div>
+
+        <!-- DESCRIPCIÓN -->
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" rows="2" formControlName="descripcion"></textarea>
+        </div>
+
+        <!-- CATEGORÍA -->
+        <div class="form-group">
+            <label for="categoriaId">Categoría</label>
+
+            <select id="categoriaId" formControlName="categoriaId">
+                <option [ngValue]="null">Seleccione categoría</option>
+
+                <option *ngFor="let c of categorias$ | async" [ngValue]="c.id">
+                    {{ c.nombre }}
+                </option>
+
+            </select>
+
+            <p class="error" *ngIf="form.get('categoriaId')?.invalid && form.get('categoriaId')?.touched">
+                La categoría es obligatoria.
+            </p>
+        </div>
+
+
+        <!-- PROVEEDOR -->
+        <div class="form-group">
+            <label for="proveedorId">Proveedor</label>
+            <select id="proveedorId" formControlName="proveedorId">
+                <option value="">Seleccione proveedor</option>
+                <option *ngFor="let p of proveedores$ | async" [value]="p.id">{{ p.razonSocial }}</option>
+            </select>
+        </div>
+
+        <!-- COLOR -->
+        <div class="form-group">
+            <label for="color">Color</label>
+            <input type="text" id="color" formControlName="color" />
+        </div>
+
+        <!-- TEXTURA -->
+        <div class="form-group">
+            <label for="textura">Textura</label>
+            <input type="text" id="textura" formControlName="textura" />
+        </div>
+
+        <!-- ESPESOR -->
+        <div class="form-group">
+            <label for="espesor">Espesor (mm)</label>
+            <input type="number" id="espesor" formControlName="espesor" />
+        </div>
+
+        <!-- LARGO -->
+        <div class="form-group">
+            <label for="largo">Largo (cm)</label>
+            <input type="number" id="largo" formControlName="largo" />
+        </div>
+
+        <!-- ANCHO -->
+        <div class="form-group">
+            <label for="ancho">Ancho (cm)</label>
+            <input type="number" id="ancho" formControlName="ancho" />
+        </div>
+
+        <!-- UNIDAD MEDIDA -->
+        <div class="form-group">
+            <label for="unidadMedida">Unidad de Medida</label>
+            <select id="unidadMedida" formControlName="unidadMedida">
+                <option value="UNIDAD">Unidad</option>
+                <option value="ML">ML</option>
+                <option value="PAR">Par</option>
+                <option value="CAJA">Caja</option>
+            </select>
+        </div>
+
+        <!-- PRECIO COMPRA -->
+        <div class="form-group">
+            <label for="precioCompra">Precio Compra (S/)</label>
+            <input type="number" id="precioCompra" formControlName="precioCompra" step="0.01" />
+            <p class="error" *ngIf="form.get('precioCompra')?.invalid && form.get('precioCompra')?.touched">
+                Precio de compra inválido.
+            </p>
+        </div>
+
+        <!-- PRECIO VENTA -->
+        <div class="form-group">
+            <label for="precioVenta">Precio Venta (S/)</label>
+            <input type="number" id="precioVenta" formControlName="precioVenta" step="0.01" />
+            <p class="error" *ngIf="form.get('precioVenta')?.invalid && form.get('precioVenta')?.touched">
+                Precio de venta inválido.
+            </p>
+        </div>
+
+        <!-- STOCK MÍNIMO -->
+        <div class="form-group">
+            <label for="stockMinimo">Stock Mínimo</label>
+            <input type="number" id="stockMinimo" formControlName="stockMinimo" />
+        </div>
+
+        <!-- ACTIVO (solo edición) -->
+        <div class="form-group" *ngIf="editMode">
+            <label for="activo">Estado</label>
+            <select id="activo" formControlName="activo">
+                <option [value]="true">Activo</option>
+                <option [value]="false">Inactivo</option>
+            </select>
+        </div>
+
+        <!-- ACCIONES -->
+        <div class="acciones">
+            <button class="btn-save" type="submit" [disabled]="form.invalid">
+                {{ editMode ? 'Actualizar' : 'Guardar' }}
+            </button>
+            <button class="btn-cancel" routerLink="/products" type="button">
+                Cancelar
+            </button>
+        </div>
+
+    </form>
+</section>

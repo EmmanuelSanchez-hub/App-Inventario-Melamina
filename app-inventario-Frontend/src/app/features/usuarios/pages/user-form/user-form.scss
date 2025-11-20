@@ -1,0 +1,154 @@
+.user-form {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 25px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+
+  color: #e5edf3;
+  font-family: "Inter", sans-serif;
+
+  /* ================= TITLE ================= */
+  h2 {
+    font-size: 26px;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 25px;
+    letter-spacing: 0.4px;
+    color: #fff;
+  }
+
+  /* ================= FORM ================= */
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+
+    /* ---------- FORM GROUP ---------- */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #cfd9e2;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 14px;
+
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(4px);
+
+        color: #e5edf3;
+        transition: 0.25s;
+        outline: none;
+
+        &:focus {
+          border-color: #1ea7ff;
+          box-shadow: 0 0 8px rgba(30, 167, 255, 0.35);
+        }
+      }
+
+      .error {
+        font-size: 12px;
+        color: #ff6b6b;
+      }
+    }
+
+    #username,
+    #email,
+    #telefono {
+      grid-column: span 2;
+    }
+
+    .acciones {
+      grid-column: span 2;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 10px;
+
+      button {
+        padding: 12px 25px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+        border: none;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #1ea7ff, #0074d9);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 140, 255, 0.4);
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(0, 140, 255, 0.55);
+        }
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #d8e4ec;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.20);
+        }
+      }
+    }
+  }
+}
+
+@media (width < 600px) {
+  .user-form {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 18px;
+    width: 100%;
+
+    * {
+      max-width: 100%;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+
+      .form-group input,
+      .form-group select {
+        font-size: 14px;
+        padding: 10px 12px;
+      }
+
+      /* Botones móviles */
+      .acciones {
+        flex-direction: column;
+        gap: 10px;
+
+        button {
+          width: 100%;
+          padding: 12px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

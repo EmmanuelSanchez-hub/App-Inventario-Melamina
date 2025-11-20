@@ -1,0 +1,114 @@
+<section class="mov-form" *ngIf="api.can('compras_write'); else sinPermiso">
+
+  <!-- ENCABEZADO -->
+  <header class="header">
+    <div class="titulo">
+      <span class="material-icons icono">shopping_cart</span>
+      <div>
+        <h2>Registrar Compra</h2>
+        <p class="subtitulo">Entrada de productos por abastecimiento de proveedor.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- CARD DEL FORMULARIO -->
+  <form [formGroup]="form" (ngSubmit)="guardar()" class="card form-card">
+    
+    <div class="bloque">
+      <h3 class="bloque-titulo">Producto</h3>
+
+      <div class="form-group">
+        <label>Buscar producto</label>
+
+        <div class="input-icon">
+          <span class="material-icons">search</span>
+          <input
+            type="text"
+            placeholder="Buscar por nombre o código..."
+            [formControl]="buscarProducto"
+          />
+        </div>
+
+        <ul class="resultados" *ngIf="productos.length > 0">
+          <li *ngFor="let p of productos" (click)="seleccionarProducto(p)">
+            <strong>{{ p.codigo }}</strong> — {{ p.nombre }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <h3 class="bloque-titulo">Proveedor</h3>
+
+      <div class="form-group">
+        <label>Buscar proveedor</label>
+
+        <div class="input-icon">
+          <span class="material-icons">search</span>
+          <input
+            type="text"
+            placeholder="Razón social…"
+            [formControl]="buscarProveedor"
+          />
+        </div>
+
+        <ul class="resultados" *ngIf="proveedores.length > 0">
+          <li *ngFor="let pv of proveedores" (click)="seleccionarProveedor(pv)">
+            {{ pv.razonSocial }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <h3 class="bloque-titulo">Detalles de la Compra</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Cantidad</label>
+          <div class="input-icon">
+            <span class="material-icons">countertops</span>
+            <input type="number" formControlName="cantidad" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Precio Unitario</label>
+          <div class="input-icon">
+            <span class="material-icons">payments</span>
+            <input type="number" step="0.01" formControlName="precioUnitario" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label>Observaciones</label>
+        <textarea rows="3" formControlName="observaciones"></textarea>
+      </div>
+    </div>
+
+    <div class="acciones">
+      <button type="button" class="btn btn-secundario" routerLink="/movimientos">
+        <span class="material-icons">arrow_back</span>
+        Volver
+      </button>
+
+      <button 
+        type="submit" 
+        class="btn btn-primario" 
+        [disabled]="form.invalid"
+        *ngIf="api.can('compras_write')">
+        <span class="material-icons">save</span>
+        Guardar Compra
+      </button>
+    </div>
+
+  </form>
+
+</section>
+
+<ng-template #sinPermiso>
+  <div class="sin-permiso">
+    <h2>No tienes permiso para registrar compras.</h2>
+  </div>
+</ng-template>

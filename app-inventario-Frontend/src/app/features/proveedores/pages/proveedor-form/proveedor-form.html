@@ -1,0 +1,98 @@
+<section class="proveedor-form">
+
+    <h2>{{ editMode ? 'Editar Proveedor' : 'Registrar Nuevo Proveedor' }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+
+        <!-- RAZÓN SOCIAL -->
+        <div class="form-group">
+            <label for="razonSocial">Razón Social</label>
+            <input type="text" id="razonSocial" formControlName="razonSocial" />
+            <p class="error" *ngIf="form.get('razonSocial')?.invalid && form.get('razonSocial')?.touched">
+                *La razón social es obligatoria.
+            </p>
+        </div>
+
+        <!-- RUC -->
+        <div class="form-group">
+            <label for="ruc">RUC</label>
+            <input type="text" id="ruc" formControlName="ruc" />
+            <!-- Campo vacío -->
+            <p class="error" *ngIf="form.get('ruc')?.hasError('required') && form.get('ruc')?.touched">
+                *El RUC es obligatorio.
+            </p>
+            <!-- Longitud incorrecta -->
+            <p class="error" *ngIf="form.get('ruc')?.hasError('longitudInvalida') && form.get('ruc')?.touched">
+               *El RUC debe tener 11 dígitos numéricos.
+            </p>
+
+            <!-- Formato incorrecto -->
+            <p class="error" *ngIf="form.get('ruc')?.hasError('prefijoInvalido') && form.get('ruc')?.touched">
+                *Debe colocar un RUC valido.
+            </p>
+
+        </div>
+
+        <!-- CONTACTO -->
+        <div class="form-group">
+            <label for="contacto">Contacto</label>
+            <input type="text" id="contacto" formControlName="contacto" />
+        </div>
+
+        <!-- TELÉFONO -->
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="text" id="telefono" formControlName="telefono" />
+            <!-- Campo vacío -->
+            <p class="error" *ngIf="form.get('telefono')?.hasError('required') && form.get('telefono')?.touched">
+                *El TELEFONO es obligatorio.
+            </p>
+            <!-- Formato incorrecto -->
+            <p class="error" *ngIf="form.get('telefono')?.hasError('pattern') && form.get('telefono')?.touched">
+                *El TELEFONO debe tener 9 digitos.
+            </p>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" />
+            <p class="error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+                *Ingrese un correo válido.
+            </p>
+        </div>
+
+        <!-- DIRECCIÓN -->
+        <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" formControlName="direccion" />
+        </div>
+
+        <!-- CIUDAD -->
+        <div class="form-group">
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" formControlName="ciudad" />
+        </div>
+        
+        <div class="form-group" *ngIf="editMode">
+            <label for="activo">Estado</label>
+            <select id="activo" formControlName="activo">
+                <option [value]="true">Activo</option>
+                <option [value]="false">Inactivo</option>
+            </select>
+        </div>
+
+        <!-- ACCIONES -->
+        <div class="acciones">
+            <button class="btn-save" type="submit" [disabled]="form.invalid">
+                {{ editMode ? 'Actualizar' : 'Guardar' }}
+            </button>
+
+            <button class="btn-cancel" routerLink="/proveedores" type="button">
+                Cancelar
+            </button>
+        </div>
+
+    </form>
+
+</section>

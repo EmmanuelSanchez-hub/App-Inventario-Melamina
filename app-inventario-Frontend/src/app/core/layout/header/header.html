@@ -1,0 +1,161 @@
+<header class="header">
+
+  <!-- LOGO -->
+  <div class="logo menu-item">
+    <button class="icon-btn">
+      <span class="material-icons">storefront</span>
+    </button>
+    <span class="label">CesarCort</span>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="nav-links">
+
+    <!-- DASHBOARD (TODOS LOS ROLES) -->
+    <div class="menu-item" routerLink="/dashboard" routerLinkActive="active">
+      <button class="icon-btn">
+        <span class="material-icons">dashboard</span>
+      </button>
+      <span class="label">Dashboard</span>
+    </div>
+
+    <!-- =======================
+          CATÁLOGO
+         ======================= -->
+    <div class="menu-item dropdown"
+         *ngIf="api.can('productos_read') || api.can('proveedores_read')"
+         [class.open]="openCatalogo"
+         (click)="toggleCatalogo()">
+
+      <button class="icon-btn">
+        <span class="material-icons">inventory_2</span>
+      </button>
+
+      <span class="label">Catálogo</span>
+      <span class="arrow material-icons">expand_more</span>
+
+      <!-- SUBMENU -->
+      <div class="drop-menu">
+
+        <!-- Productos (TODOS PUEDEN LEER) -->
+        <div 
+          class="sub-item" 
+          routerLink="/products" 
+          routerLinkActive="active"
+          *ngIf="api.can('productos_read')">
+          <button class="icon-btn">
+            <span class="material-icons">inventory_2</span>
+          </button>
+          <span class="label">Productos</span>
+        </div>
+
+        <!-- Proveedores (ADMIN + ALMACENERO) -->
+        <div 
+          class="sub-item" 
+          routerLink="/proveedores" 
+          routerLinkActive="active"
+          *ngIf="api.can('proveedores_read')">
+          <button class="icon-btn">
+            <span class="material-icons">local_shipping</span>
+          </button>
+          <span class="label">Proveedores</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =======================
+          PERSONAS
+         ======================= -->
+    <div class="menu-item dropdown"
+         *ngIf="api.can('clientes_read') || api.can('usuarios_read')"
+         [class.open]="openPersonas"
+         (click)="togglePersonas()">
+
+      <button class="icon-btn">
+        <span class="material-icons">groups</span>
+      </button>
+
+      <span class="label">Personas</span>
+      <span class="arrow material-icons">expand_more</span>
+
+      <div class="drop-menu">
+
+        <!-- Clientes (ADMIN + VENDEDOR) -->
+        <div 
+          class="sub-item" 
+          routerLink="/clientes" 
+          routerLinkActive="active"
+          *ngIf="api.can('clientes_read')">
+          <button class="icon-btn">
+            <span class="material-icons">groups</span>
+          </button>
+          <span class="label">Clientes</span>
+        </div>
+
+        <!-- Usuarios (SOLO ADMIN) -->
+        <div 
+          class="sub-item" 
+          routerLink="/usuarios" 
+          routerLinkActive="active"
+          *ngIf="api.can('usuarios_read')">
+          <button class="icon-btn">
+            <span class="material-icons">manage_accounts</span>
+          </button>
+          <span class="label">Usuarios</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="menu-item dropdown"
+         *ngIf="api.can('inventario_read') || api.can('movimientos_read')"
+         [class.open]="openInventario"
+         (click)="toggleInventario()">
+
+      <button class="icon-btn">
+        <span class="material-icons">warehouse</span>
+      </button>
+
+      <span class="label">Inventario</span>
+      <span class="arrow material-icons">expand_more</span>
+
+      <div class="drop-menu">
+        <div 
+          class="sub-item" 
+          routerLink="/inventario" 
+          routerLinkActive="active"
+          *ngIf="api.can('inventario_read')">
+          <button class="icon-btn">
+            <span class="material-icons">warehouse</span>
+          </button>
+          <span class="label">Inventario</span>
+        </div>
+        <div 
+          class="sub-item" 
+          routerLink="/movimientos" 
+          routerLinkActive="active"
+          *ngIf="api.can('ventas_read') || api.can('compras_read') || api.can('ajustes_read')">
+          <button class="icon-btn">
+            <span class="material-icons">sync_alt</span>
+          </button>
+          <span class="label">Movimientos</span>
+        </div>
+
+      </div>
+    </div>
+
+  </nav>
+  <div class="user-info menu-item">
+    <button class="icon-btn">
+      <span class="material-icons">person</span>
+    </button>
+
+    <span class="label username">{{ username }}</span>
+
+    <button class="icon-btn" (click)="logout()">
+      <span class="material-icons">logout</span>
+    </button>
+  </div>
+
+</header>
