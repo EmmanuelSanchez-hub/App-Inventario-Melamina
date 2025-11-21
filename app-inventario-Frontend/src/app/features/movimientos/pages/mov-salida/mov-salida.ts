@@ -16,6 +16,7 @@ import { ApiService } from '../../../../core/services/api.service';
   styleUrl: './mov-salida.scss',
 })
 export class MovSalida implements OnInit {
+
   buscarCliente = new FormControl('');
   buscarProducto = new FormControl('');
 
@@ -33,7 +34,10 @@ export class MovSalida implements OnInit {
   }[] = [];
 
   form = new FormGroup({
-    pago: new FormControl<number>(0, { nonNullable: true, validators: [Validators.min(0)] }),
+    pago: new FormControl<number>(0, {
+      nonNullable: true,
+      validators: [Validators.min(0)]
+    }),
     observaciones: new FormControl<string>('', { nonNullable: true }),
   });
 
@@ -46,10 +50,11 @@ export class MovSalida implements OnInit {
     private movService: MovimientosService,
     private router: Router,
     public api: ApiService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
 
+    // Buscar cliente en tiempo real
     this.buscarCliente.valueChanges
       .pipe(
         debounceTime(300),
@@ -59,6 +64,7 @@ export class MovSalida implements OnInit {
         this.clientes = cliente ? [cliente] : [];
       });
 
+    // Buscar producto en tiempo real
     this.buscarProducto.valueChanges
       .pipe(
         debounceTime(300),
@@ -93,10 +99,27 @@ export class MovSalida implements OnInit {
     this.recalcularTotal();
   }
 
-  cambiarCantidad(item: any, cantidad: number) {
-    item.cantidad = cantidad;
-    item.subtotal = item.precioUnitario * cantidad;
+  cambiarCantidad(item: any, nuevaCantidad: number) {
+
+    if (!nuevaCantidad || isNaN(nuevaCantidad) || nuevaCantidad <= 0) {
+      item.cantidad = 0; // deja inválido para que HTML muestre error
+      item.subtotal = 0;
+      this.recalcularTotal();
+      return;
+    }
+
+    item.cantidad = nuevaCantidad;
+    item.subtotal = item.precioUnitario * item.cantidad;
+
     this.recalcularTotal();
+  }
+
+  verificarCantidad(item: any) {
+    if (item.cantidad <= 0) {
+      item.cantidad = 1;
+      item.subtotal = item.precioUnitario;
+      this.recalcularTotal();
+    }
   }
 
   eliminarItem(i: number) {
@@ -106,13 +129,33 @@ export class MovSalida implements OnInit {
 
   recalcularTotal() {
     this.totalVenta = this.carrito.reduce((acc, item) => acc + item.subtotal, 0);
+
     const pago = this.form.get('pago')?.value || 0;
     this.vuelto = pago - this.totalVenta;
   }
 
   guardar() {
     if (!this.clienteSeleccionado) return;
-    if (this.carrito.length === 0) return;
+
+    if (this.carrito.length === 0) {
+      alert("Debe agregar al menos un producto.");
+      return;
+    }
+
+    // Validación final de cantidades
+    for (let item of this.carrito) {
+      if (item.cantidad <= 0) {
+        alert(`La cantidad del producto ${item.nombre} debe ser mayor a 0.`);
+        return;
+      }
+    }
+
+    // Validación de pago
+    const pago = this.form.get('pago')?.value || 0;
+    if (pago < this.totalVenta) {
+      alert("El pago no puede ser menor al total de la venta.");
+      return;
+    }
 
     const detalle = this.carrito.map(item => ({
       tipoMovimiento: 'SALIDA',
@@ -123,6 +166,7 @@ export class MovSalida implements OnInit {
       observaciones: this.form.value.observaciones
     }));
 
+    // Enviar al backend
     detalle.forEach(item => {
       this.movService.registrarSalida(item).subscribe();
     });

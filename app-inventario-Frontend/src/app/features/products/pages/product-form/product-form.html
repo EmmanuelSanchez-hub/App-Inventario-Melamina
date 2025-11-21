@@ -72,18 +72,33 @@
         <div class="form-group">
             <label for="espesor">Espesor (mm)</label>
             <input type="number" id="espesor" formControlName="espesor" />
+            <p class="error" *ngIf="form.get('espesor')?.touched && form.get('espesor')?.invalid">
+                <span *ngIf="form.get('espesor')?.errors?.['required']">El espesor es obligatorio.</span>
+                <span *ngIf="form.get('espesor')?.errors?.['min']">Debe ser mayor que 0.</span>
+                <span *ngIf="form.get('espesor')?.errors?.['pattern']">Solo números enteros positivos.</span>
+            </p>
         </div>
 
         <!-- LARGO -->
         <div class="form-group">
             <label for="largo">Largo (cm)</label>
             <input type="number" id="largo" formControlName="largo" />
+            <p class="error" *ngIf="form.get('largo')?.touched && form.get('largo')?.invalid">
+                <span *ngIf="form.get('largo')?.errors?.['required']">El largo es obligatorio.</span>
+                <span *ngIf="form.get('largo')?.errors?.['min']">Debe ser mayor que 0.</span>
+                <span *ngIf="form.get('largo')?.errors?.['pattern']">Solo números enteros positivos.</span>
+            </p>
         </div>
 
         <!-- ANCHO -->
         <div class="form-group">
             <label for="ancho">Ancho (cm)</label>
             <input type="number" id="ancho" formControlName="ancho" />
+            <p class="error" *ngIf="form.get('ancho')?.touched && form.get('ancho')?.invalid">
+                <span *ngIf="form.get('ancho')?.errors?.['required']">El ancho es obligatorio.</span>
+                <span *ngIf="form.get('ancho')?.errors?.['min']">Debe ser mayor que 0.</span>
+                <span *ngIf="form.get('ancho')?.errors?.['pattern']">Solo números enteros positivos.</span>
+            </p>
         </div>
 
         <!-- UNIDAD MEDIDA -->
@@ -101,8 +116,9 @@
         <div class="form-group">
             <label for="precioCompra">Precio Compra (S/)</label>
             <input type="number" id="precioCompra" formControlName="precioCompra" step="0.01" />
-            <p class="error" *ngIf="form.get('precioCompra')?.invalid && form.get('precioCompra')?.touched">
-                Precio de compra inválido.
+            <p class="error" *ngIf="form.get('precioCompra')?.touched && form.get('precioCompra')?.invalid">
+                <span *ngIf="form.get('precioCompra')?.errors?.['required']">El precio de compra es obligatorio.</span>
+                <span *ngIf="form.get('precioCompra')?.errors?.['min']">Debe ser mayor a 0.</span>
             </p>
         </div>
 
@@ -110,8 +126,9 @@
         <div class="form-group">
             <label for="precioVenta">Precio Venta (S/)</label>
             <input type="number" id="precioVenta" formControlName="precioVenta" step="0.01" />
-            <p class="error" *ngIf="form.get('precioVenta')?.invalid && form.get('precioVenta')?.touched">
-                Precio de venta inválido.
+            <p class="error" *ngIf="form.get('precioVenta')?.touched && form.get('precioVenta')?.invalid">
+                <span *ngIf="form.get('precioVenta')?.errors?.['required']">El precio de venta es obligatorio.</span>
+                <span *ngIf="form.get('precioVenta')?.errors?.['min']">Debe ser mayor a 0.</span>
             </p>
         </div>
 

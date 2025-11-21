@@ -10,6 +10,7 @@ import { ProveedorService } from '../../../proveedores/services/proveedor.servic
 
 @Component({
   selector: 'app-product-form',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './product-form.html',
   styleUrls: ['./product-form.scss'],
@@ -17,8 +18,8 @@ import { ProveedorService } from '../../../proveedores/services/proveedor.servic
 export class ProductForm implements OnInit {
 
   productoId!: number;
-
   editMode = false;
+
   categorias: Categoria[] = [];
   categoriasCargadas = false;
 
@@ -30,29 +31,53 @@ export class ProductForm implements OnInit {
     nombre: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     descripcion: new FormControl<string>('', { nonNullable: true }),
 
-    categoriaId: new FormControl<number|null>(null, { nonNullable: false, validators: Validators.required }),
+    categoriaId: new FormControl<number | null>(null, { validators: Validators.required }),
     proveedorId: new FormControl<number>(0, { nonNullable: true }),
 
     color: new FormControl<string>('', { nonNullable: true }),
     textura: new FormControl<string>('', { nonNullable: true }),
-    espesor: new FormControl<number>(0, { nonNullable: true }),
-    largo: new FormControl<number>(0, { nonNullable: true }),
-    ancho: new FormControl<number>(0, { nonNullable: true }),
+
+    espesor: new FormControl<number>(0, {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern(/^(0|[1-9][0-9]*)$/),
+        Validators.min(1)
+      ]
+    }),
+
+    largo: new FormControl<number>(0, {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern(/^(0|[1-9][0-9]*)$/),
+        Validators.min(1)
+      ]
+    }),
+    
+    ancho: new FormControl<number>(0, {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern(/^(0|[1-9][0-9]*)$/),
+        Validators.min(1)
+      ]
+    }),
 
     unidadMedida: new FormControl<string>('UNIDAD', { nonNullable: true }),
 
     precioCompra: new FormControl<number>(0, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(0.01)]
+      validators: [Validators.required, Validators.min(0.01)],
     }),
     precioVenta: new FormControl<number>(0, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(0.01)]
+      validators: [Validators.required, Validators.min(0.01)],
     }),
 
     stockMinimo: new FormControl<number>(5, { nonNullable: true }),
-    activo: new FormControl<boolean>(true, { nonNullable: true })
-  });
+    activo: new FormControl<boolean>(true, { nonNullable: true }),
+  });   // ← ← ← ESTA LLAVE FALTABA
 
 
   constructor(
@@ -62,7 +87,7 @@ export class ProductForm implements OnInit {
     private proveedorService: ProveedorService,
     private apiService: ApiService
   ) {
-    this.apiService.getCategorias().subscribe(cats => {
+    this.apiService.getCategorias().subscribe((cats: Categoria[]) => {
       this.categorias = cats;
       this.categoriasCargadas = true;
     });
@@ -71,12 +96,10 @@ export class ProductForm implements OnInit {
   ngOnInit(): void {
     this.categorias$ = this.apiService.getCategorias();
     this.proveedores$ = this.proveedorService.getProveedores();
+
     const codigo = this.route.snapshot.paramMap.get('codigo');
 
-    this.form.get('categoriaId')?.valueChanges.subscribe(value => {
-      console.log("categoriaId cambió:", value);
-      this.onCodeFieldChange();
-    });
+    this.form.get('categoriaId')?.valueChanges.subscribe(() => this.onCodeFieldChange());
     this.form.get('color')?.valueChanges.subscribe(() => this.onCodeFieldChange());
     this.form.get('espesor')?.valueChanges.subscribe(() => this.onCodeFieldChange());
     this.form.get('largo')?.valueChanges.subscribe(() => this.onCodeFieldChange());
@@ -105,34 +128,27 @@ export class ProductForm implements OnInit {
     }
 
     const data = this.form.value;
-    const codigo = this.form.get('codigo')?.value!;
 
     if (this.editMode) {
-      //Editar
       this.productService.update(this.productoId, data).subscribe({
         next: () => this.router.navigate(['/products']),
-        error: err => console.error(err)
+        error: (err) => console.error(err),
       });
     } else {
-      // CREAR
       this.productService.create(data).subscribe({
         next: () => this.router.navigate(['/products']),
-        error: err => console.error(err)
+        error: (err) => console.error(err),
       });
     }
   }
 
   private onCodeFieldChange() {
-    if (!this.categoriasCargadas){
-      return;
-    }
+    if (!this.categoriasCargadas) return;
     this.generarCodigo();
   }
 
   private generarCodigo() {
-    if (!this.categorias || this.categorias.length === 0) {
-      return;
-    }
+    if (!this.categorias || this.categorias.length === 0) return;
 
     const categoriaId = this.form.get('categoriaId')?.value;
     const color = this.form.get('color')?.value || '';
@@ -140,26 +156,27 @@ export class ProductForm implements OnInit {
     const largo = this.form.get('largo')?.value;
     const ancho = this.form.get('ancho')?.value;
 
-    console.log("Datos actuales:", { categoriaId, color, espesor });
-
     const cat = this.categorias.find(c => c.id === categoriaId);
     if (!cat) return;
 
-    // Procesar categoría
     const palabras = cat.nombre.trim().split(' ');
     const omitidas = ['de', 'del', 'la', 'las', 'el', 'los', 'para', 'en', 'y'];
     const utiles = palabras.filter(w => !omitidas.includes(w.toLowerCase()));
     const palabraCodigo = utiles.length > 1 ? utiles[utiles.length - 1] : utiles[0];
+
     const codCategoria = palabraCodigo.substring(0, 3).toUpperCase();
     const codColor = color.substring(0, 3).toUpperCase();
     const codEspesor = Number(espesor).toString();
+
     const tieneLargo = largo && Number(largo) > 0;
     const tieneAncho = ancho && Number(ancho) > 0;
+
     let codigoFinal = `${codCategoria}-${codColor}-${codEspesor}`;
 
     if (tieneLargo && tieneAncho) {
       codigoFinal += `-${Number(largo)}-${Number(ancho)}`;
     }
+
     this.form.get('codigo')?.setValue(codigoFinal, { emitEvent: false });
   }
 }

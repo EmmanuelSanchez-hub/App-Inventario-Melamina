@@ -6,6 +6,7 @@ import { ProveedorService } from '../../services/proveedor.service';
 
 @Component({
   selector: 'app-proveedor-form',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './proveedor-form.html',
   styleUrl: './proveedor-form.scss',
@@ -15,39 +16,61 @@ export class ProveedorForm {
   proveedorId!: number;
   editMode = false;
 
+  ciudades = [
+    'Chimbote',
+    'Lima',
+    'Arequipa',
+    'Trujillo',
+    'Cusco',
+    'Piura',
+    'Chiclayo',
+    'Iquitos',
+    'Huancayo',
+    'Tacna'
+  ];
+
   form = new FormGroup({
     razonSocial: new FormControl<string>('', {
       nonNullable: true,
       validators: Validators.required
     }),
 
+    // VALIDACIÓN RUC CORREGIDA
     ruc: new FormControl<string>('', {
       nonNullable: true,
       validators: [
         Validators.required,
-        this.validarLongitudRuc,
+        Validators.pattern(/^[0-9]{11}$/),  // Solo números y exactamente 11
         this.validarPrefijoRuc
       ]
     }),
 
     contacto: new FormControl<string>('', { nonNullable: true }),
 
-    telefono: new FormControl<string>('', { 
+    // TELÉFONO SOLO NUMEROS
+    telefono: new FormControl<string>('', {
       nonNullable: true,
       validators: [
         Validators.required,
-        Validators.pattern(/^[0-9]{9}$/)
+        Validators.pattern(/^[0-9]{9}$/) // Solo 9 números
       ]
     }),
 
+    // EMAIL SOLO FORMATO VALIDO
     email: new FormControl<string>('', {
       nonNullable: true,
-      validators: Validators.email
+      validators: [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/)
+      ]
     }),
 
     direccion: new FormControl<string>('', { nonNullable: true }),
 
-    ciudad: new FormControl<string>('', { nonNullable: true }),
+    ciudad: new FormControl<string>('Chimbote', {
+      nonNullable: true,
+      validators: Validators.required
+    }),
 
     activo: new FormControl<boolean>(true, { nonNullable: true })
   });
@@ -56,7 +79,7 @@ export class ProveedorForm {
     private route: ActivatedRoute,
     private router: Router,
     private proveedorService: ProveedorService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -67,23 +90,22 @@ export class ProveedorForm {
     }
   }
 
-  validarLongitudRuc(control: AbstractControl) {
-    const value = control.value || '';
-    // Solo números y 11 dígitos
-    return /^[0-9]{11}$/.test(value) ? null : { longitudInvalida: true };
-  }
-
+  // VALIDADOR PERSONALIZADO DEL RUC (Prefijo SUNAT)
   validarPrefijoRuc(control: AbstractControl) {
-    
-    const value = control.value || '';
+    const value: string = control.value || '';
 
-    // Solo revisar si empieza con prefijo válido
-    if (value.length === 11 && !/^(10|15|16|17|20)/.test(value)) {
-      return { prefijoInvalido: true };
+    if (value.length === 11) {
+      const prefijo = value.substring(0, 2);
+
+      const prefijosValidos = ['10', '15', '16', '17', '20'];
+
+      if (!prefijosValidos.includes(prefijo)) {
+        return { prefijoInvalido: true };
+      }
     }
+
     return null;
   }
-
 
   cargarProveedor(id: number) {
     this.proveedorService.getById(id).subscribe({
@@ -104,19 +126,16 @@ export class ProveedorForm {
     const data = this.form.value;
 
     if (this.editMode) {
-      // EDITAR
       this.proveedorService.update(this.proveedorId, data).subscribe({
         next: () => this.router.navigate(['/proveedores']),
         error: err => console.error(err)
       });
 
     } else {
-      // CREAR
       this.proveedorService.create(data).subscribe({
         next: () => this.router.navigate(['/proveedores']),
         error: err => console.error(err)
       });
     }
   }
-
 }

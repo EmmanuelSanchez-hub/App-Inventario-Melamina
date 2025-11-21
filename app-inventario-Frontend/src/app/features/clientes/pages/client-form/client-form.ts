@@ -15,58 +15,65 @@ export class ClientForm {
   editMode = false;
 
   form = new FormGroup({
-    tipoDocumento: new FormControl<string>('DNI', {
-      nonNullable: true,
-      validators: Validators.required
-    }),
+  tipoDocumento: new FormControl<string>('DNI', {
+    nonNullable: true,
+    validators: Validators.required
+  }),
 
-    numeroDocumento: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [
-        Validators.required,
-        this.validarDocumentoPorTipo
-      ]
-    }),
+  numeroDocumento: new FormControl<string>('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      this.validarDocumentoPorTipo
+    ]
+  }),
 
-    nombres: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2)
-      ]
-    }),
+  nombres: new FormControl<string>('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.minLength(2)
+    ]
+  }),
 
-    apellidos: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2)
-      ]
-    }),
+  apellidos: new FormControl<string>('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.minLength(2)
+    ]
+  }),
 
-    razonSocial: new FormControl<string>('', {
-      nonNullable: true,
-      validators: this.validarRazonSocialRuc
-    }),
+  razonSocial: new FormControl<string>('', {
+    nonNullable: true,
+    validators: this.validarRazonSocialRuc
+  }),
 
-    telefono: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.pattern(/^[0-9]{9}$/) // 9 dígitos
-      ]
-    }),
+  telefono: new FormControl<string>('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.pattern(/^[0-9]{9}$/)
+    ]
+  }),
 
-    email: new FormControl<string>('', {
-      nonNullable: true,
-      validators: Validators.email  // opcional pero si se llena debe ser válido
-    }),
+  email: new FormControl<string>('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/)
+    ]
+  }),
 
-    direccion: new FormControl<string>('', { nonNullable: true }),
-    ciudad: new FormControl<string>('', { nonNullable: true }),
 
-    activo: new FormControl<boolean>(true, { nonNullable: true })
-  });
+  direccion: new FormControl<string>('', { nonNullable: true }),
+
+  // 👉 Aquí el valor por defecto
+  ciudad: new FormControl<string>('Chimbote', { nonNullable: true }),
+
+  activo: new FormControl<boolean>(true, { nonNullable: true })
+});
+
 
   constructor(
     private route: ActivatedRoute,
@@ -120,6 +127,8 @@ export class ClientForm {
 
     return null;
   }
+
+  
 
   // Razón social obligatoria solo si tipoDocumento = RUC
   validarRazonSocialRuc(control: AbstractControl) {
