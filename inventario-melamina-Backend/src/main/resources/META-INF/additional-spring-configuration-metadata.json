@@ -1,0 +1,20 @@
+{
+  "groups": [
+    {
+      "name": "jwt",
+      "description": "Configuración para JSON Web Tokens (JWT)"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "Clave secreta para firmar tokens JWT (codificada en Base64)"
+    },
+    {
+      "name": "jwt.expiration",
+      "type": "java.lang.Long",
+      "description": "Tiempo de expiración del token JWT en milisegundos (defecto: 86400000 = 24 horas)"
+    }
+  ]
+}

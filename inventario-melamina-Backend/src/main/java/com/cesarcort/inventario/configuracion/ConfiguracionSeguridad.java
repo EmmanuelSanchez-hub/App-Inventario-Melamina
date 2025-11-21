@@ -39,8 +39,9 @@ public class ConfiguracionSeguridad {
      * Conecta UserDetailsService con el PasswordEncoder
      */
     @Bean
+    @SuppressWarnings("deprecation")
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        var authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(detallesUsuarioServicio);
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
