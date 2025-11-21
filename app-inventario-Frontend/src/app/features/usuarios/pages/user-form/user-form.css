@@ -1,0 +1,135 @@
+@charset "UTF-8";
+.user-form {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  color: #e5edf3;
+  font-family: "Inter", sans-serif;
+  /* ================= TITLE ================= */
+  /* ================= FORM ================= */
+}
+.user-form h2 {
+  font-size: 26px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 25px;
+  letter-spacing: 0.4px;
+  color: #fff;
+}
+.user-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  /* ---------- FORM GROUP ---------- */
+}
+.user-form form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.user-form form .form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #cfd9e2;
+}
+.user-form form .form-group input,
+.user-form form .form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  color: #e5edf3;
+  transition: 0.25s;
+  outline: none;
+}
+.user-form form .form-group input:focus,
+.user-form form .form-group select:focus {
+  border-color: #1ea7ff;
+  box-shadow: 0 0 8px rgba(30, 167, 255, 0.35);
+}
+.user-form form .form-group .error {
+  font-size: 12px;
+  color: #ff6b6b;
+}
+.user-form form #username,
+.user-form form #email,
+.user-form form #telefono {
+  grid-column: span 2;
+}
+.user-form form .acciones {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 10px;
+}
+.user-form form .acciones button {
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+  border: none;
+}
+.user-form form .acciones .btn-primary {
+  background: linear-gradient(135deg, #1ea7ff, #0074d9);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 140, 255, 0.4);
+}
+.user-form form .acciones .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 140, 255, 0.55);
+}
+.user-form form .acciones .btn-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #d8e4ec;
+}
+.user-form form .acciones .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (width < 600px) {
+  .user-form {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 18px;
+    width: 100%;
+  }
+  .user-form * {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .user-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    /* Botones móviles */
+  }
+  .user-form form .form-group input,
+  .user-form form .form-group select {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+  .user-form form .acciones {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .user-form form .acciones button {
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+  }
+}/*# sourceMappingURL=user-form.css.map */

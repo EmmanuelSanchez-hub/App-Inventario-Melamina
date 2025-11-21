@@ -1,0 +1,214 @@
+.mov-form {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 25px;
+  color: #e5edf3;
+  font-family: "Inter", sans-serif;
+  /* =======================================================
+     HEADER
+  ======================================================= */
+  /* =======================================================
+     CARD FORM
+  ======================================================= */
+  /* =======================================================
+     BLOQUES (Producto / Proveedor / Detalles)
+  ======================================================= */
+  /* =======================================================
+     FORM GROUP
+  ======================================================= */
+  /* =======================================================
+     INPUT CON ICONO
+  ======================================================= */
+  /* =======================================================
+     LISTA DE RESULTADOS (buscador)
+  ======================================================= */
+  /* =======================================================
+     FORM ROW (Cantidad + Precio)
+  ======================================================= */
+  /* =======================================================
+     BOTONES
+  ======================================================= */
+}
+.mov-form .header {
+  margin-bottom: 25px;
+}
+.mov-form .header .titulo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.mov-form .header .titulo .icono {
+  font-size: 34px;
+  color: #1ea7ff;
+}
+.mov-form .header .titulo h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+}
+.mov-form .header .subtitulo {
+  margin: 6px 0 0 46px;
+  color: #bcd5e0;
+  font-size: 14px;
+}
+.mov-form .form-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(7px);
+          backdrop-filter: blur(7px);
+  border-radius: 22px;
+  padding: 25px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.mov-form .bloque {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.mov-form .bloque .bloque-titulo {
+  font-size: 17px;
+  font-weight: 600;
+  color: #d6e3ec;
+  margin-bottom: 2px;
+}
+.mov-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mov-form .form-group label {
+  font-size: 14px;
+  color: #bcd2df;
+}
+.mov-form .form-group input,
+.mov-form .form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  outline: none;
+  font-size: 15px;
+}
+.mov-form .form-group input::-moz-placeholder, .mov-form .form-group textarea::-moz-placeholder {
+  color: #9bb5c7;
+}
+.mov-form .form-group input::placeholder,
+.mov-form .form-group textarea::placeholder {
+  color: #9bb5c7;
+}
+.mov-form .input-icon {
+  position: relative;
+}
+.mov-form .input-icon span.material-icons {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #9bb5c7;
+}
+.mov-form .input-icon input {
+  padding-left: 40px;
+}
+.mov-form .resultados {
+  margin-top: 4px;
+  list-style: none;
+  background: rgba(0, 0, 0, 0.35);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  max-height: 190px;
+  overflow-y: auto;
+}
+.mov-form .resultados li {
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: 0.25s;
+  color: #dbe7ef;
+  font-size: 14px;
+}
+.mov-form .resultados li:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.mov-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (width < 600px) {
+  .mov-form .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+.mov-form .acciones {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 10px;
+}
+@media (width < 600px) {
+  .mov-form .acciones {
+    flex-direction: column;
+  }
+}
+.mov-form .acciones .btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+.mov-form .acciones .btn .material-icons {
+  font-size: 20px;
+}
+.mov-form .acciones .btn-secundario {
+  background: rgba(255, 255, 255, 0.12);
+  color: #dbe7ee;
+}
+.mov-form .acciones .btn-secundario:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.mov-form .acciones .btn-primario {
+  background: linear-gradient(135deg, #1ea7ff, #0074d9);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 140, 255, 0.35);
+}
+.mov-form .acciones .btn-primario:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 140, 255, 0.55);
+}
+.mov-form .acciones .btn-primario:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (width < 600px) {
+  .mov-form .input-icon {
+    position: relative;
+  }
+  .mov-form .input-icon span.material-icons {
+    font-size: 18px;
+    left: 10px;
+  }
+  .mov-form .input-icon input, .mov-form .input-icon textarea {
+    padding-left: 40px !important;
+    font-size: 14px;
+    height: 42px;
+  }
+  .mov-form .form-group {
+    margin-bottom: 14px;
+  }
+}/*# sourceMappingURL=mov-entrada.css.map */

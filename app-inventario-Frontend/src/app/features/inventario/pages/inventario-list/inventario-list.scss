@@ -1,6 +1,7 @@
 .inventario-list {
   max-width: 1280px;
-  margin-top: 4px;
+  width: 100%;
+  margin: 4px auto;
   padding: 25px;
 
   background: linear-gradient(180deg, #0d1f2d, #143044);
@@ -52,9 +53,6 @@
     }
   }
 
-  /* ------------------------------------------------- */
-  /* FILTROS */
-  /* ------------------------------------------------- */
   .filtros {
     display: flex;
     gap: 12px;

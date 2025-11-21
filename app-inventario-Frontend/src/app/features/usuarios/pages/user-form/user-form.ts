@@ -12,20 +12,52 @@ import { CommonModule } from '@angular/common';
 })
 export class UserForm {
   usuarioId!: number;
-
   editMode = false;
+
   roles = [
     { value: 'ROLE_ADMIN', label: 'Administrador' },
     { value: 'ROLE_VENDEDOR', label: 'Vendedor' },
     { value: 'ROLE_ALMACENERO', label: 'Almacenero' },
   ];
 
-  form = new FormGroup({
-    username: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
-    email: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
-    nombres: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
-    apellidos: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
-    telefono: new FormControl<string>('', { nonNullable: true }),
+  // FORMULARIO FLEXIBLE PARA EVITAR ERRORES TS2769
+  form: FormGroup = new FormGroup<any>({
+    username: new FormControl<string>('', {
+      nonNullable: true,
+      validators: Validators.required,
+    }),
+
+    email: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern(/^[\w.-]+@[\w.-]+\.com$/)
+      ],
+    }),
+
+    nombres: new FormControl<string>('', {
+      nonNullable: true,
+      validators: Validators.required,
+    }),
+
+    apellidos: new FormControl<string>('', {
+      nonNullable: true,
+      validators: Validators.required,
+    }),
+
+    telefono: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern(/^[0-9]{9}$/),
+      ],
+    }),
+
+    // password solo se usa en creación
+    password: new FormControl<string>('', {
+      nonNullable: true,
+      validators: Validators.required,
+    }),
 
     rol: new FormControl<string>('ROLE_VENDEDOR', {
       nonNullable: true,
@@ -42,21 +74,31 @@ export class UserForm {
   ) {}
 
   ngOnInit(): void {
-    
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
       this.editMode = true;
       this.usuarioId = Number(id);
       this.cargarUsuario(this.usuarioId);
+
+      // En modo edición NO se usa password
+      this.form.removeControl('password');
     }
+
+    // Sanitizador SOLO NÚMEROS en teléfono
+    this.form.controls['telefono'].valueChanges.subscribe(value => {
+      if (value) {
+        const soloNumeros = value.replace(/\D/g, '');
+        if (soloNumeros !== value) {
+          this.form.controls['telefono'].setValue(soloNumeros, { emitEvent: false });
+        }
+      }
+    });
   }
 
   cargarUsuario(id: number) {
     this.userService.getById(id).subscribe({
-      next: (usuario) => {
-        this.form.patchValue(usuario);
-      },
+      next: (usuario) => this.form.patchValue(usuario),
       error: (err) => console.error('Error cargando usuario:', err),
     });
   }
@@ -72,12 +114,13 @@ export class UserForm {
     if (this.editMode) {
       this.userService.update(this.usuarioId, data).subscribe({
         next: () => this.router.navigate(['/usuarios']),
-        error: (err) => console.error('Error al actualizar usuario:', err)
+        error: (err) => console.error('Error al actualizar usuario:', err),
       });
     } else {
+      // crear usuario → incluye password
       this.userService.create(data).subscribe({
         next: () => this.router.navigate(['/usuarios']),
-        error: (err) => console.error('Error al crear usuario:', err)
+        error: (err) => console.error('Error al crear usuario:', err),
       });
     }
   }

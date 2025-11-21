@@ -16,11 +16,17 @@
         <!-- RUC -->
         <div class="form-group">
             <label for="ruc">RUC</label>
-            <input type="text" id="ruc" formControlName="ruc" />
+            <input type="text" 
+                   id="ruc" 
+                   formControlName="ruc"
+                   maxlength="11"
+                   oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            
             <!-- Campo vacío -->
             <p class="error" *ngIf="form.get('ruc')?.hasError('required') && form.get('ruc')?.touched">
                 *El RUC es obligatorio.
             </p>
+
             <!-- Longitud incorrecta -->
             <p class="error" *ngIf="form.get('ruc')?.hasError('longitudInvalida') && form.get('ruc')?.touched">
                *El RUC debe tener 11 dígitos numéricos.
@@ -28,9 +34,8 @@
 
             <!-- Formato incorrecto -->
             <p class="error" *ngIf="form.get('ruc')?.hasError('prefijoInvalido') && form.get('ruc')?.touched">
-                *Debe colocar un RUC valido.
+                *Debe colocar un RUC válido.
             </p>
-
         </div>
 
         <!-- CONTACTO -->
@@ -42,14 +47,20 @@
         <!-- TELÉFONO -->
         <div class="form-group">
             <label for="telefono">Teléfono</label>
-            <input type="text" id="telefono" formControlName="telefono" />
+            <input type="text" 
+                   id="telefono" 
+                   formControlName="telefono"
+                   maxlength="9"
+                   oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            
             <!-- Campo vacío -->
             <p class="error" *ngIf="form.get('telefono')?.hasError('required') && form.get('telefono')?.touched">
                 *El TELEFONO es obligatorio.
             </p>
+
             <!-- Formato incorrecto -->
             <p class="error" *ngIf="form.get('telefono')?.hasError('pattern') && form.get('telefono')?.touched">
-                *El TELEFONO debe tener 9 digitos.
+                *El TELEFONO debe tener 9 dígitos.
             </p>
         </div>
 
@@ -71,9 +82,27 @@
         <!-- CIUDAD -->
         <div class="form-group">
             <label for="ciudad">Ciudad</label>
-            <input type="text" id="ciudad" formControlName="ciudad" />
+
+            <select id="ciudad" formControlName="ciudad">
+                <option value="">Seleccione una ciudad</option>
+                <option value="Chimbote">Chimbote</option>
+                <option value="Lima">Lima</option>
+                <option value="Arequipa">Arequipa</option>
+                <option value="Trujillo">Trujillo</option>
+                <option value="Cusco">Cusco</option>
+                <option value="Piura">Piura</option>
+                <option value="Chiclayo">Chiclayo</option>
+                <option value="Iquitos">Iquitos</option>
+                <option value="Huancayo">Huancayo</option>
+                <option value="Tacna">Tacna</option>
+            </select>
+
+            <p class="error" *ngIf="form.get('ciudad')?.invalid && form.get('ciudad')?.touched">
+                *La ciudad es obligatoria.
+            </p>
         </div>
-        
+
+        <!-- ESTADO (solo en modo edición) -->
         <div class="form-group" *ngIf="editMode">
             <label for="activo">Estado</label>
             <select id="activo" formControlName="activo">

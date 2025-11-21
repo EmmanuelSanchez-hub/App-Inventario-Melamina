@@ -1,0 +1,195 @@
+@charset "UTF-8";
+.mov-list {
+  max-width: 1280px;
+  margin: 12px auto;
+  padding: 25px;
+  background: linear-gradient(180deg, #0d1f2d, #143044);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  color: #e5edf3;
+  font-family: "Inter", sans-serif;
+  /* =======================================================
+     ACCIONES SUPERIORES
+  ======================================================= */
+  /* =======================================================
+     TÍTULO
+  ======================================================= */
+  /* =======================================================
+     TABLA
+  ======================================================= */
+  /* =======================================================
+     BADGES
+  ======================================================= */
+}
+.mov-list .top-actions {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  /* Entrada (Compra) */
+  /* Salida (Venta) */
+  /* Ajuste */
+}
+.mov-list .top-actions .action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 140, 255, 0.3);
+}
+.mov-list .top-actions .action-btn .material-icons {
+  font-size: 20px;
+}
+.mov-list .top-actions .action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 140, 255, 0.45);
+}
+.mov-list .top-actions .entrada {
+  background: linear-gradient(135deg, #00c46a, #00994f);
+  box-shadow: 0 4px 12px rgba(0, 196, 106, 0.35);
+}
+.mov-list .top-actions .salida {
+  background: linear-gradient(135deg, #ff6b6b, #d94343);
+  box-shadow: 0 4px 12px rgba(255, 77, 77, 0.35);
+}
+.mov-list .top-actions .ajuste {
+  background: linear-gradient(135deg, #1ea7ff, #0074d9);
+  box-shadow: 0 4px 12px rgba(0, 140, 255, 0.35);
+}
+.mov-list .header-title {
+  margin-bottom: 20px;
+}
+.mov-list .header-title h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+}
+.mov-list .header-title .sub {
+  font-size: 14px;
+  margin-top: 4px;
+  color: #bcd5e0;
+}
+.mov-list .tabla-wrapper {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  padding: 20px;
+  overflow-x: auto;
+  /* Scroll para móvil */
+}
+.mov-list .tabla-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+.mov-list .tabla-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+.mov-list .tabla-wrapper::-webkit-scrollbar-thumb {
+  background: #1ea7ff;
+  border-radius: 3px;
+}
+.mov-list .tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.mov-list .tabla thead {
+  background: rgba(255, 255, 255, 0.08);
+}
+.mov-list .tabla thead th {
+  padding: 12px 10px;
+  color: #d7e4ea;
+  font-weight: 600;
+  text-align: left;
+}
+.mov-list .tabla tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: 0.25s;
+}
+.mov-list .tabla tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.mov-list .tabla tbody tr td {
+  padding: 12px 10px;
+  color: #eef4f7;
+}
+.mov-list .tabla .obs-col {
+  max-width: 220px;
+  white-space: normal;
+}
+.mov-list .badge {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.mov-list .badge.entrada {
+  background: rgba(0, 196, 106, 0.18);
+  color: #00e68a;
+  border: 1px solid rgba(0, 196, 106, 0.3);
+}
+.mov-list .badge.salida {
+  background: rgba(255, 77, 77, 0.18);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 77, 77, 0.35);
+}
+.mov-list .badge.ajuste {
+  background: rgba(30, 167, 255, 0.18);
+  color: #1ea7ff;
+  border: 1px solid rgba(30, 167, 255, 0.35);
+}
+
+/* ===========================================================
+   RESPONSIVE — width < 600px
+=========================================================== */
+@media (width < 600px) {
+  .mov-list {
+    padding: 15px;
+    margin: 8px;
+    border-radius: 18px;
+  }
+  .mov-list .top-actions {
+    flex-direction: column;
+  }
+  .mov-list .top-actions .action-btn {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+  .mov-list .top-actions .action-btn .material-icons {
+    font-size: 18px;
+  }
+  .mov-list .header-title h2 {
+    font-size: 22px;
+  }
+  .mov-list .tabla-wrapper {
+    padding: 15px;
+  }
+  .mov-list .tabla th,
+  .mov-list .tabla td {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .mov-list .badge {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+  .mov-list .obs-col {
+    max-width: 160px;
+  }
+}/*# sourceMappingURL=mov-list.css.map */
