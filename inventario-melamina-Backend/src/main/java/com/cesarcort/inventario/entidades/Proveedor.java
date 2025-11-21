@@ -43,12 +43,15 @@ public class Proveedor {
     private String ciudad;
     
     @Column(nullable = false)
+    @Builder.Default
     private Boolean activo = true;
     
     @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Producto> productos = new ArrayList<>();
     
     @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Movimiento> movimientos = new ArrayList<>();
     
     @CreationTimestamp

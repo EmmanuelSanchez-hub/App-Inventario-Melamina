@@ -23,6 +23,7 @@ public class Inventario {
     private Producto producto;
     
     @Column(name = "cantidad_actual", nullable = false)
+    @Builder.Default
     private Integer cantidadActual = 0;
     
     @Column(length = 100)

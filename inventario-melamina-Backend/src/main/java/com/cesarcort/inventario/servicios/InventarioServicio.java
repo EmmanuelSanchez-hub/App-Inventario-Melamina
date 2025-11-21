@@ -1,10 +1,8 @@
 package com.cesarcort.inventario.servicios;
 
 import com.cesarcort.inventario.entidades.Inventario;
-import com.cesarcort.inventario.entidades.Producto;
 import com.cesarcort.inventario.excepciones.RecursoNoEncontradoException;
 import com.cesarcort.inventario.repositorios.InventarioRepositorio;
-import com.cesarcort.inventario.repositorios.ProductoRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +17,6 @@ import java.util.List;
 public class InventarioServicio {
     
     private final InventarioRepositorio inventarioRepositorio;
-    private final ProductoRepositorio productoRepositorio;
     
     /**
      * Obtiene todo el inventario
