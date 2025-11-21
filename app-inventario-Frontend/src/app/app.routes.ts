@@ -4,12 +4,12 @@ import { authGuard } from './core/auth/guards/auth-guard';
 import { MainLayout } from './core/layout/main-layout/main-layout';
 import { Dashboard } from './features/dashboard/pages/dashboard/dashboard';
 import { ErrorConexion } from './core/pages/error-conexion/error-conexion';
+import { Contactar } from './features/landing/pages/contactar/contactar';
 
 export const routes: Routes = [
-  // Redirección inicial
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-
-  // Ruta pública
+  // ===================== RUTAS PÚBLICAS =====================
+  { path: '', loadComponent: () => import('./features/landing/pages/landing/landing').then(m => m.Landing) },
+  { path: 'contactar', component: Contactar },
   { path: 'login', component: Login },
   { path: 'error-conexion', component: ErrorConexion },
 
@@ -58,5 +58,6 @@ export const routes: Routes = [
             .then(m => m.MovimientosModule),
       }
     ]
-  }
+  },
+  { path: '**', redirectTo: '' }
 ];
