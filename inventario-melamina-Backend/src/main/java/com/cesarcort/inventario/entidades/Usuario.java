@@ -40,6 +40,7 @@ public class Usuario {
     private String telefono;
     
     @Column(nullable = false)
+    @Builder.Default
     private Boolean activo = true;
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -47,6 +48,7 @@ public class Usuario {
     private Rol rol;
     
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Movimiento> movimientos = new ArrayList<>();
     
     @CreationTimestamp

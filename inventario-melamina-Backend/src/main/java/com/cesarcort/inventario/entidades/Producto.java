@@ -52,16 +52,20 @@ public class Producto {
     private BigDecimal ancho;
     
     @Column(name = "unidad_medida", length = 20)
+    @Builder.Default
     private String unidadMedida = "UNIDAD"; // UNIDAD, M2, ML, KG
     
     // Precios y stock
     @Column(name = "precio_compra", nullable = false, precision = 10, scale = 2)
+    @Builder.Default
     private BigDecimal precioCompra = BigDecimal.ZERO;
     
     @Column(name = "precio_venta", nullable = false, precision = 10, scale = 2)
+    @Builder.Default
     private BigDecimal precioVenta = BigDecimal.ZERO;
     
     @Column(name = "stock_minimo")
+    @Builder.Default
     private Integer stockMinimo = 5;
     
     @ManyToOne(fetch = FetchType.LAZY)
@@ -69,12 +73,14 @@ public class Producto {
     private Proveedor proveedor;
     
     @Column(nullable = false)
+    @Builder.Default
     private Boolean activo = true;
     
     @OneToOne(mappedBy = "producto", cascade = CascadeType.ALL)
     private Inventario inventario;
     
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Movimiento> movimientos = new ArrayList<>();
     
     @CreationTimestamp
