@@ -1,0 +1,87 @@
+<section class="contactar">
+
+  <h1 class="title">Contáctanos</h1>
+  <p class="subtitle">
+    Estamos listos para ayudarte con tu proyecto en melamina.  
+    Completa el formulario o comunícate directamente con nosotros.
+  </p>
+
+  <div class="contact-container">
+
+    <!-- FORMULARIO -->
+    <form class="contact-form glass card-3d" [formGroup]="form" (ngSubmit)="enviar()">
+
+      <h2>Envíanos un mensaje</h2>
+
+      <div class="form-group">
+        <label>Nombres</label>
+        <input type="text" formControlName="nombre">
+        <span class="error" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+          Ingresa tu nombre.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label>Correo</label>
+        <input type="email" formControlName="correo">
+        <span class="error" *ngIf="form.get('correo')?.touched && form.get('correo')?.invalid">
+          Ingresa un correo válido.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label>Teléfono (opcional)</label>
+        <input type="text" formControlName="telefono">
+      </div>
+
+      <div class="form-group">
+        <label>Mensaje</label>
+        <textarea rows="4" formControlName="mensaje"></textarea>
+        <span class="error" *ngIf="form.get('mensaje')?.touched && form.get('mensaje')?.invalid">
+          El mensaje es obligatorio.
+        </span>
+      </div>
+
+      <button class="btn primary" type="submit" [disabled]="form.invalid">
+        Enviar Mensaje
+      </button>
+
+    </form>
+
+    <!-- INFORMACIÓN DE CONTACTO -->
+    <div class="contact-info glass card-3d">
+
+      <h2>Información Directa</h2>
+
+      <p class="info-item">
+        <strong>Teléfono:</strong><br>
+        999-888-777
+      </p>
+
+      <p class="info-item">
+        <strong>Email:</strong><br>
+        contacto@cesarcore.com
+      </p>
+
+      <p class="info-item">
+        <strong>Ubicación:</strong><br>
+        Lima, Perú
+      </p>
+
+      <div class="social">
+        <a href="#" target="_blank">
+          <img src="https://images.icon-icons.com/373/PNG/256/Whatsapp_37229.png" alt="WhatsApp">
+        </a>
+        <a href="#" target="_blank">
+          <img src="https://images.icon-icons.com/1195/PNG/512/1490889652-facebook_82510.png" alt="Facebook">
+        </a>
+        <a href="#" target="_blank">
+          <img src="https://images.icon-icons.com/836/PNG/512/Instagram_icon-icons.com_66804.png" alt="Instagram">
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

@@ -22,6 +22,7 @@ public class Cliente {
     private Long id;
     
     @Column(name = "tipo_documento", length = 20)
+    @Builder.Default
     private String tipoDocumento = "DNI"; // DNI, RUC, CE
     
     @Column(name = "numero_documento", nullable = false, unique = true, length = 20)
@@ -49,9 +50,11 @@ public class Cliente {
     private String ciudad;
     
     @Column(nullable = false)
+    @Builder.Default
     private Boolean activo = true;
     
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Movimiento> movimientos = new ArrayList<>();
     
     @CreationTimestamp

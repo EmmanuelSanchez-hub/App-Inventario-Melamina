@@ -1,0 +1,618 @@
+$bg-dark: #0d1f2e;
+$bg-dark-2: #102739;
+
+$accent-1: #00c2e8;
+$accent-2: #48e0ff;
+
+$text: #eaf3f8;
+$text-dim: rgba(234, 243, 248, 0.75);
+
+$glass-bg: rgba(255, 255, 255, 0.04);
+$glass-border: rgba(255, 255, 255, 0.08);
+
+$radius: 18px;
+
+
+
+.landing {
+  min-height: 100vh;
+  padding: 30px 40px 80px;
+  background: linear-gradient(180deg, $bg-dark, $bg-dark-2);
+  color: $text;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+.glass {
+  background: $glass-bg;
+  border: 1px solid $glass-border;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: $radius;
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.card-3d {
+  transition: 0.35s ease;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+  }
+}
+
+
+/* ==========================================================================
+   BOTONES
+   ========================================================================== */
+
+.btn {
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+
+  &.primary {
+    background: linear-gradient(135deg, $accent-1, $accent-2);
+    color: #022024;
+    box-shadow: 0 0 16px rgba(0, 194, 232, 0.45);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 22px rgba(0, 194, 232, 0.65);
+    }
+  }
+
+  &.secondary {
+    background: transparent;
+    color: $text;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.11);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.landing-header {
+  padding: 18px 32px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .logo-square {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(145deg, $accent-1, $accent-2);
+      box-shadow: 0 0 15px rgba(72, 224, 255, 0.7);
+    }
+
+    .brand-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 22px;
+
+    a {
+      text-decoration: none;
+      color: $text;
+      opacity: 0.85;
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: 0.25s ease;
+
+      &:hover {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.12);
+      }
+    }
+  }
+}
+
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.hero-clientes {
+  padding: 45px;
+  margin-bottom: 60px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  animation: fadeUp 0.8s ease;
+
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  p {
+    font-size: 1.15rem;
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    max-width: 600px;
+  }
+
+  img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: $radius;
+  }
+}
+
+
+/* ==========================================================================
+   SECCIÓN TITULOS
+   ========================================================================== */
+
+.section-title {
+  margin: 40px 0 12px;
+
+  h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1rem;
+    opacity: 0.75;
+  }
+}
+
+
+/* ==========================================================================
+   POR QUÉ ELEGIRNOS
+   ========================================================================== */
+
+.why-grid {
+  margin-top: 30px;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+  .why-card {
+    padding: 18px;
+    animation: fadeUp 0.8s ease;
+
+    img {
+      height: 180px;
+      width: 100%;
+      border-radius: $radius;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    p {
+      opacity: 0.8;
+    }
+  }
+}
+
+
+/* ==========================================================================
+   SERVICIOS
+   ========================================================================== */
+
+.services-grid {
+  margin-top: 35px;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+  .service-card {
+    padding: 18px;
+    animation: fadeUp 1s ease;
+
+    img {
+      height: 180px;
+      width: 100%;
+      border-radius: $radius;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      margin-bottom: 4px;
+    }
+
+    p {
+      opacity: 0.75;
+    }
+  }
+}
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  border-radius: $radius;
+  padding: 20px;
+  margin-top: 30px;
+  position: relative;
+}
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.6s ease;
+  width: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  padding: 20px;
+  text-align: center;
+
+  img {
+    width: 80%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: $radius;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    margin-bottom: 6px;
+    font-size: 1.3rem;
+  }
+
+  p {
+    opacity: 0.75;
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin: auto;
+  }
+}
+
+.carousel-indicators {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  span {
+    width: 12px;
+    height: 12px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    &.active {
+      background: linear-gradient(to right, $accent-1, $accent-2);
+      transform: scale(1.25);
+      box-shadow: 0 0 8px rgba(0, 194, 232, 0.8);
+    }
+  }
+}
+
+
+/* ==========================================================================
+   TESTIMONIOS (CON ESTRELLAS)
+   ========================================================================== */
+
+.testimonios-grid {
+  margin-top: 35px;
+  display: grid;
+  gap: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  .testimonio-card {
+    padding: 22px;
+    animation: fadeUp 0.9s ease;
+
+    .stars {
+      color: #ffd166;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(255, 209, 102, 0.6);
+    }
+
+    p {
+      opacity: 0.85;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    span {
+      opacity: 0.6;
+      font-size: 0.88rem;
+    }
+  }
+}
+
+
+/* ==========================================================================
+   PROCESO
+   ========================================================================== */
+
+.proceso-grid {
+  margin-top: 35px;
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+  .proceso-item {
+    animation: fadeUp 0.8s ease;
+
+    h3 {
+      margin-bottom: 4px;
+      font-size: 1.1rem;
+    }
+
+    p {
+      opacity: 0.8;
+      font-size: 0.95rem;
+    }
+  }
+}
+
+
+/* ==========================================================================
+   MATERIALES
+   ========================================================================== */
+
+.materiales-grid {
+  margin-top: 35px;
+  display: grid;
+  gap: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+  img {
+    height: 190px;
+    object-fit: cover;
+    border-radius: $radius;
+  }
+}
+
+
+/* ==========================================================================
+   BENEFICIOS
+   ========================================================================== */
+
+.beneficios-grid {
+  margin-top: 35px;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  .beneficio {
+    padding: 20px;
+    text-align: center;
+    animation: fadeUp 0.9s ease;
+    font-weight: 600;
+  }
+}
+
+
+/* ==========================================================================
+   ZONA EMPLEADOS (DISEÑO CORPORATIVO MEJORADO)
+   ========================================================================== */
+
+.empleados-section {
+  margin-top: 80px;
+  padding: 50px 35px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  .section-title h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  .section-title p {
+    opacity: 0.75;
+    margin-bottom: 12px;
+  }
+
+  .empleados-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+
+    .empleados-info {
+      padding: 32px 28px;
+      border-radius: $radius;
+      animation: fadeUp 0.8s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+
+      h3 {
+        margin-bottom: 6px;
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+
+      ul {
+        margin: 10px 0 5px;
+        padding-left: 0;
+        list-style: none;
+        line-height: 1.55;
+        opacity: 0.85;
+        font-size: 1rem;
+
+        li {
+          padding-left: 0;
+        }
+      }
+
+      .btn {
+        align-self: flex-start;
+        margin-top: 10px;
+      }
+    }
+
+    .empleados-image {
+      border-radius: $radius;
+      overflow: hidden;
+      animation: fadeUp 1s ease;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+
+      img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        transition: 0.35s ease;
+
+        &:hover {
+          transform: scale(1.03);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    .empleados-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+
+      .empleados-info {
+        align-items: center;
+      }
+
+      .empleados-info .btn {
+        align-self: center;
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   PROYECTOS}
+
+/* ==========================================================================
+   PROYECTOS
+   ========================================================================== */
+
+.proyectos-grid {
+  margin-top: 35px;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  img {
+    height: 240px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: $radius;
+    animation: fadeUp 0.9s ease;
+  }
+}
+
+
+/* ==========================================================================
+   CTA FINAL
+   ========================================================================== */
+
+.cta-clientes {
+  padding: 40px;
+  text-align: center;
+  margin-top: 40px;
+  animation: fadeUp 1s ease;
+
+  p {
+    opacity: 0.8;
+    margin-bottom: 18px;
+  }
+}
+
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.landing-footer {
+  margin-top: 60px;
+  padding: 32px 24px;
+
+  .footer-main {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1.2fr 1fr 0.8fr;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 14px;
+
+    img {
+      width: 32px;
+      height: 32px;
+      opacity: 0.85;
+      transition: 0.25s ease;
+
+      &:hover {
+        opacity: 1;
+        transform: translateY(-3px) scale(1.08);
+      }
+    }
+  }
+
+  .footer-copy {
+    margin-top: 18px;
+    text-align: center;
+    opacity: 0.6;
+    font-size: 0.88rem;
+  }
+}
+
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .landing {
+    padding: 20px;
+  }
+
+  .hero-clientes {
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    img {
+      height: 300px;
+      margin-top: 20px;
+    }
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+  }
+}

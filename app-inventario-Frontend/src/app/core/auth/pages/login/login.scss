@@ -77,6 +77,25 @@
   display: flex;
   flex-direction: column;
 
+  /* ======================================
+     BOTÓN VOLVER AL INICIO (AGREGADO)
+     ====================================== */
+  .volver-inicio {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #48e0ff;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.25s ease;
+
+    &:hover {
+      color: #00c2e8;
+      transform: translateX(-4px);
+    }
+  }
+
   h2 {
     font-size: 26px;
     font-weight: 700;

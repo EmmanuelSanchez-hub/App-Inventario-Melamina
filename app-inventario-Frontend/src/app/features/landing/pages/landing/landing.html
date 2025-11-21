@@ -1,0 +1,301 @@
+<section class="landing">
+
+    <header class="landing-header glass">
+        <div class="brand">
+            <span class="logo-square"></span>
+            <span class="brand-name">CesarCore</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#clientes">Clientes</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#empleados">Empleados</a>
+            <a routerLink="/contactar">Contacto</a>
+        </nav>
+    </header>
+
+    <section id="clientes" class="clientes-section layout-section">
+        <div></div>
+
+        <!-- HERO CLIENTES -->
+        <div class="hero-clientes glass card-3d">
+            <div class="hero-text">
+                <h1>Muebles en Melamina<br>Hechos a Medida</h1>
+                <p>
+                    Transformamos tus espacios con muebles modernos, funcionales y personalizados.
+                    Especialistas en closets, cocinas, escritorios, repisas, muebles de TV y proyectos
+                    integrales para hogares y negocios.
+                </p>
+
+                <div class="hero-buttons">
+                    <button routerLink="/contactar" class="btn primary">Cotizar Proyecto</button>
+                    <button href="#proyectos" class="btn secondary">Ver Proyectos</button>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+                    alt="Diseño en melamina moderno" />
+            </div>
+        </div>
+
+        <section class="why-section">
+            <div class="section-title">
+                <h2>¿Por qué elegirnos?</h2>
+                <p>Somos tu aliado para diseñar ambientes modernos, duraderos y funcionales.</p>
+            </div>
+
+            <div class="why-grid">
+
+                <div class="why-card glass card-3d">
+                    <img src="https://melamina.net.pe/wp-content/uploads/2025/05/barra-de-melamina-para-cocina-a.jpg" />
+                    <h3>Diseño Personalizado</h3>
+                    <p>Creamos proyectos según tu espacio, estilo y necesidades específicas.</p>
+                </div>
+
+                <div class="why-card glass card-3d">
+                    <img
+                        src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=80" />
+                    <h3>Instalación Profesional</h3>
+                    <p>Montaje preciso, nivelación perfecta y acabados de alto estándar.</p>
+                </div>
+
+                <div class="why-card glass card-3d">
+                    <img src="https://www.grupoftr.com/wp-content/uploads/2021/02/BANNER_VESTO-1.jpg" />
+                    <h3>Materiales Premium</h3>
+                    <p>Trabajamos con melamina de alta calidad y herrajes duraderos.</p>
+                </div>
+
+                <div class="why-card glass card-3d">
+                    <img
+                        src="https://d1szwdapq2yuw7.cloudfront.net/photos/project/hd/reparar-agujeros-en-muebles-3519638.jpg" />
+                    <h3>Garantía Real</h3>
+                    <p>Nuestros proyectos incluyen garantía y soporte post-instalación.</p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="servicios-section">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p>Fabricamos muebles con precisión milimétrica.</p>
+            </div>
+
+            <div class="carousel-container glass card-3d">
+
+                <div class="carousel-wrapper" [ngStyle]="{ transform: transform }">
+                    <div class="carousel-slide" *ngFor="let s of servicios">
+                        <img [src]="s.img" alt="{{ s.title }}">
+                        <h3>{{ s.title }}</h3>
+                        <p>{{ s.desc }}</p>
+                    </div>
+                </div>
+
+                <div class="carousel-indicators">
+                    <span *ngFor="let s of servicios; let i = index" [class.active]="i === currentIndex"
+                        (click)="goToSlide(i)"></span>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="testimonios-section">
+            <div class="section-title">
+                <h2>Lo que dicen nuestros clientes</h2>
+            </div>
+
+            <div class="testimonios-grid">
+                <div class="testimonio-card glass card-3d">
+                    <div class="stars">★★★★★</div>
+                    <p>“El mueble quedó impecable. Excelente atención y acabado perfecto.”</p>
+                    <span>- María R.</span>
+                </div>
+
+                <div class="testimonio-card glass card-3d">
+                    <div class="stars">★★★★☆</div>
+                    <p>“Trabajo profesional y rápido. Muy recomendados.”</p>
+                    <span>- Carlos T.</span>
+                </div>
+
+                <div class="testimonio-card glass card-3d">
+                    <div class="stars">★★★★☆</div>
+                    <p>“Diseños modernos y muy buena asesoría. 10/10.”</p>
+                    <span>- Ana P.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="proceso-section">
+            <div class="section-title">
+                <h2>Nuestro Proceso</h2>
+                <p>Fácil, rápido y profesional</p>
+            </div>
+
+            <div class="proceso-grid glass">
+                <div class="proceso-item">
+                    <h3>1. Asesoría</h3>
+                    <p>Escuchamos tus ideas y necesidades.</p>
+                </div>
+
+                <div class="proceso-item">
+                    <h3>2. Diseño</h3>
+                    <p>Proponemos soluciones funcionales y modernas.</p>
+                </div>
+
+                <div class="proceso-item">
+                    <h3>3. Fabricación</h3>
+                    <p>Usamos materiales resistentes y melamina premium.</p>
+                </div>
+
+                <div class="proceso-item">
+                    <h3>4. Instalación</h3>
+                    <p>Montaje profesional con garantía real.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="materiales-section">
+            <div class="section-title">
+                <h2>Melaminas Disponibles</h2>
+                <p>Escoge entre diferentes texturas y colores</p>
+            </div>
+
+            <div class="materiales-grid">
+                <img class="card-3d glass"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkbFPUXiUjIIXJYnAB9IH5j-DLJQl6RHG6sFGbfllNRIZ2EreMluLraxLxKxIJ8AqM8F0&usqp=CAU">
+                <img class="card-3d glass"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj6h6v4lYc7JOzFcKV_r8BQO9anyUOZxhelBIsGSVwkkHsGr4HyCPTy5h85_lVez8ufpM&usqp=CAU">
+                <img class="card-3d glass"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRARl2ZoyH93rdzrRBaslNpuQgmFV1T1Q_Y7kPDAUZ36gtwcZ-wObq_jdblWYyQD17fz4w&usqp=CAU">
+                <img class="card-3d glass"
+                    src="https://images.squarespace-cdn.com/content/v1/64f9d1c3aa8b24009ae9aea9/1698687378544-4VO3L1X0B86FYROWYFD2/miel-textura-pelikano.jpg?format=1500w">
+                <img class="card-3d glass" src="https://savec.pe/cdn/downloads/productos/P_1121_0.jpg">
+                <img class="card-3d glass"
+                    src="https://sipfsa.pe/wp-content/uploads/2020/07/Amaretto-min-scaled-300x300.jpg">
+                <img class="card-3d glass"
+                    src="https://img.freepik.com/foto-gratis/textura-papel-tapiz-abstracto-oscuro_1194-6686.jpg?semt=ais_hybrid&w=740&q=80">
+                <img class="card-3d glass"
+                    src="https://promart.vteximg.com.br/arquivos/ids/8241735/62825.jpg?v=638642046212700000">
+
+            </div>
+        </section>
+
+        <section class="beneficios-section">
+            <div class="section-title">
+                <h2>Beneficios de trabajar con nosotros</h2>
+            </div>
+
+            <div class="beneficios-grid">
+                <div class="beneficio glass card-3d">Diseño 100% personalizable</div>
+                <div class="beneficio glass card-3d">Asesoría gratuita</div>
+                <div class="beneficio glass card-3d">Entrega puntual</div>
+                <div class="beneficio glass card-3d">Garantía real</div>
+            </div>
+        </section>
+
+        <section id="proyectos" class="proyectos-section">
+            <div class="section-title">
+                <h2>Proyectos Realizados</h2>
+            </div>
+
+            <div class="proyectos-grid">
+                <img class="card-3d glass"
+                    src="https://www.gamatecoficinas.com/web/image/39328-2189d372/df84b8ee9a76f3c32da5b77c9b838450.jpg?access_token=a6b4fe08-52b5-47fb-9538-947e87dfd7a8">
+                <img class="card-3d glass" src="https://www.multisilla.com/wp-content/smush-webp/Belesa-1-1.jpg.webp">
+                <img class="card-3d glass"
+                    src="https://serviciosgeneralescautivosac.pe/wp-content/uploads/2022/06/servicio-de-melamine-1.jpg">
+                <img class="card-3d glass"
+                    src="https://mueblesramis.com/wp-content/uploads/2017/10/mueble-dormitorio-cama-mesita-armario-madera-melamina-moderno-economico-blanco-muebles-ramis-855-kronos.jpg">
+            </div>
+        </section>
+
+        <section class="cta-clientes glass card-3d">
+            <h2>¿Listo para transformar tu espacio?</h2>
+            <p>Escríbenos y agenda una asesoría gratuita. Creamos muebles hechos especialmente para ti.</p>
+            <button routerLink="/contactar" class="btn primary">Solicitar Cotización</button>
+        </section>
+
+    </section> 
+
+
+    <section id="empleados" class="empleados-section layout-section">
+
+        <div class="section-title">
+            <h2>Zona para Empleados</h2>
+            <p>Acceso al sistema interno de gestión.</p>
+        </div>
+
+        <div class="empleados-grid">
+
+            <div class="empleados-info glass card-3d">
+                <h3>Sistema Interno</h3>
+                <ul>
+                    <li> Control de inventario</li>
+                    <li> Gestión de productos y categorías</li>
+                    <li> Registro de clientes y proveedores</li>
+                    <li> Movimientos de entrada y salida</li>
+                </ul>
+                <button routerLink="/login" class="btn secondary">Ingresar al Sistema</button>
+            </div>
+
+            <div class="empleados-image card-3d">
+                <img
+                    src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=900&q=80" />
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer class="landing-footer glass">
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+                <h3>CesarCore</h3>
+                <p>Muebles en melamina hechos a medida.</p>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contacto</h4>
+                <p>Atendemos consultas todos los días.</p>
+                <button routerLink="/contactar" class="btn small">Enviar mensaje</button>
+            </div>
+
+            <div class="footer-social">
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+
+                    <!-- Facebook -->
+                    <a href="#" target="_blank" class="social-icon">
+                        <img src="https://images.icon-icons.com/1195/PNG/512/1490889652-facebook_82510.png" alt="Facebook" />
+                    </a>
+
+                    <!-- WhatsApp -->
+                    <a href="#" target="_blank" class="social-icon">
+                        <img src="https://images.icon-icons.com/373/PNG/256/Whatsapp_37229.png" alt="WhatsApp" />
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="#" target="_blank" class="social-icon">
+                        <img src="https://images.icon-icons.com/836/PNG/512/Instagram_icon-icons.com_66804.png" alt="Instagram" />
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:contacto@cesarcore.com" class="social-icon">
+                        <img src="https://images.icon-icons.com/1483/PNG/512/email_102148.png" alt="Email" />
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        <p class="footer-copy">© 2025 CesarCore. Todos los derechos reservados.</p>
+    </footer>
+
+</section>

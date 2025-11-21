@@ -28,6 +28,7 @@ public class Rol {
     private String descripcion;
     
     @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
+    @Builder.Default
     private Set<Usuario> usuarios = new HashSet<>();
     
     @CreationTimestamp

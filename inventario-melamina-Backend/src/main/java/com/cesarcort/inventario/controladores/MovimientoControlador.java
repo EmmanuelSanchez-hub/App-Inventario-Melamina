@@ -3,7 +3,7 @@ package com.cesarcort.inventario.controladores;
 import com.cesarcort.inventario.dto.mapper.MovimientoMapper;
 import com.cesarcort.inventario.dto.request.AjusteInventarioRequest;
 import com.cesarcort.inventario.dto.request.MovimientoRequest;
-import com.cesarcort.inventario.dto.response.MensajeResponse;
+
 import com.cesarcort.inventario.dto.response.MovimientoResponse;
 import com.cesarcort.inventario.entidades.Movimiento;
 import com.cesarcort.inventario.entidades.Movimiento.TipoMovimiento;
@@ -15,8 +15,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -123,11 +121,7 @@ public class MovimientoControlador {
     @PostMapping("/entrada")
     @PreAuthorize("hasAnyRole('ADMIN', 'ALMACENERO')")
     public ResponseEntity<MovimientoResponse> registrarEntrada(@Valid @RequestBody MovimientoRequest request) {
-        // Obtener el usuario autenticado
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        
-        // TODO: Obtener el ID del usuario desde el username
+        // TODO: Obtener el ID del usuario desde el usuario autenticado
         // Por ahora usamos 1 como placeholder (deberías implementar esto)
         Long usuarioId = 1L;
         
@@ -163,11 +157,7 @@ public class MovimientoControlador {
      */
     @PostMapping("/salida")
     public ResponseEntity<MovimientoResponse> registrarSalida(@Valid @RequestBody MovimientoRequest request) {
-        // Obtener el usuario autenticado
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        
-        // TODO: Obtener el ID del usuario desde el username
+        // TODO: Obtener el ID del usuario desde el usuario autenticado
         Long usuarioId = 1L;
         
         Movimiento movimiento = movimientoServicio.registrarSalida(
@@ -203,11 +193,7 @@ public class MovimientoControlador {
     @PostMapping("/ajuste")
     @PreAuthorize("hasAnyRole('ADMIN', 'ALMACENERO')")
     public ResponseEntity<MovimientoResponse> registrarAjuste(@Valid @RequestBody AjusteInventarioRequest request) {
-        // Obtener el usuario autenticado
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        
-        // TODO: Obtener el ID del usuario desde el username
+        // TODO: Obtener el ID del usuario desde el usuario autenticado
         Long usuarioId = 1L;
         
         TipoMovimiento tipo = TipoMovimiento.valueOf(request.getTipo().toUpperCase());

@@ -28,9 +28,11 @@ public class Categoria {
     private String descripcion;
     
     @Column(nullable = false)
+    @Builder.Default
     private Boolean activo = true;
     
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Producto> productos = new ArrayList<>();
     
     @CreationTimestamp
