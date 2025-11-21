@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CesarCortApplication<inventario-melamina>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cesarcort.inventario.CesarCortApplication",
+            "projectName": "inventario-melamina",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

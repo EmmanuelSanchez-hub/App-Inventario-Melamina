@@ -14,15 +14,17 @@
       </p>
     </div>
 
-    <!-- PANEL DERECHO · Formulario -->
     <div class="right-panel">
+
+      <a routerLink="/inicio" class="volver-inicio">
+        ← Volver al inicio
+      </a>
 
       <h2>Bienvenido</h2>
       <p class="sub">Ingresa tus credenciales para continuar</p>
 
       <form [formGroup]="form" (ngSubmit)="login()">
 
-        <!-- USUARIO -->
         <div class="form-group">
           <label>Usuario</label>
           <div class="input-icon">
@@ -34,7 +36,6 @@
           </small>
         </div>
 
-        <!-- CONTRASEÑA -->
         <div class="form-group">
           <label>Contraseña</label>
           <div class="input-icon">
@@ -46,7 +47,6 @@
           </small>
         </div>
 
-        <!-- BOTÓN -->
         <button class="btn-login" type="submit" [disabled]="form.invalid">
           Ingresar
         </button>
